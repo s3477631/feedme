@@ -1,0 +1,10 @@
+<form [formGroup]="orderForm" noValidate>
+        <ng-container *ngFor="let orderItem of orderItems">
+            <ng-container [ngSwitch]="orderItem?.dataType">
+                <app-add-subtract-button *ngSwitchCase="'ADD_SUBTRACT'" [parentForm]="orderForm" [orderItem]="orderItem"></app-add-subtract-button>
+                <app-drop-down *ngSwitchCase="'DROP_DOWN'" [parentForm]="orderForm" [orderItems]="orderItem"></app-drop-down>
+            </ng-container>
+        </ng-container>
+</form>
+
+

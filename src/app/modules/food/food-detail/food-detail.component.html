@@ -1,0 +1,45 @@
+<ion-content>
+    <div class="card-container">
+        <div (click)="closeMenuItem()" class="close-button">
+            <ion-icon class="close-button-icon" name="close-outline"></ion-icon>
+        </div>
+
+        <div class="card-header">
+            <div class="card-title">
+                Food Item
+            </div>
+        </div>
+        <div class="card-content-container">
+            <div class="card-options-panel">
+                <!--                replace with a dynamic form generator-->
+                <div class="options-title">Options:</div>
+
+                <div class="options-container">
+
+
+                    <app-order-form></app-order-form>
+                </div>
+            </div>
+            <div class="card-description-panel">
+                <!--                <div class="card-image-container">-->
+                <img class="card-image"
+                     src="https://images.pexels.com/photos/1260968/pexels-photo-1260968.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"/>
+                <!--                </div>-->
+                <div class="card-description">
+
+                    <div class="card-body">
+                        A traditional Italian seasoned roasted pork shoulder, seared in the oven, served on
+                        a fresh, hand-made flat-bread then topped with pesto crème fraiche and arugula
+                    </div>
+                </div>
+                <div class="add-to-order-button">
+                    Add to Orders
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</ion-content>
+
+

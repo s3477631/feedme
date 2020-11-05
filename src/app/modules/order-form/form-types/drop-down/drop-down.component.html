@@ -1,0 +1,10 @@
+<div [formGroup]="parentForm">
+  <div class="size-options" >
+    <!--                        medium-->
+    <ion-icon style="top: 5px; position: relative;" name="chevron-down-outline"></ion-icon>
+  </div>
+  <ion-select  [formControlName]="orderItems?.id" interface="popover">
+    <ion-select-option  *ngFor="let menuOption of orderItems?.menuOptions" [value]="menuOption?.value">
+      {{menuOption?.size}}</ion-select-option>
+  </ion-select>
+</div>

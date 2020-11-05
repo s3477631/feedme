@@ -8,8 +8,8 @@ import {MenuExplorerService} from '../../services/menu-explorer.service';
 })
 export class DrinkPage implements OnInit {
 
-  constructor(public menuExplorerService: MenuExplorerService) {}
+  constructor() {}
   ngOnInit() {
-    this.menuExplorerService.getDrinkMenu();
+
   }
 }

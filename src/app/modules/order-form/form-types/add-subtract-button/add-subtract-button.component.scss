@@ -1,0 +1,27 @@
+.option-label{
+  font-size: 22px;
+  color: black;
+  text-align: center;
+}
+.option-actions{
+  display: flex;
+  justify-content: space-evenly;
+}
+.remove-item{
+  color: black;
+  font-size: 35px;
+}
+.qty-output{
+  text-align: center;
+  color: black;
+  font-size: 20px;
+  max-width: 46px;
+  border: none;
+}
+.qty-output:focus{
+  outline: none;
+}
+.add-item{
+  color: black;
+  font-size: 35px;
+}

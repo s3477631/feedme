@@ -1,0 +1,4 @@
+<ion-list >
+    <app-product *ngFor="let drink of menuExplorerService.$drink | async" [product]="drink">
+    </app-product>
+</ion-list>

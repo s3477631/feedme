@@ -1,6 +1,75 @@
-<ion-card>
-    <ion-row>
-        <ion-header>
-        </ion-header>
-    </ion-row>
-</ion-card>
+<ion-row class="ion-justify-content-end">
+    <div *ngIf="product.quantity > 1;"
+         style="padding: 15px; margin-right: 5px; border-radius: 50%; border: 1px solid white; background: #E11616; position: absolute; z-index: 100;">
+        <ion-text
+                style="font-size: 25px; color: white; font-weight: 500; font-family: 'Roboto Light'">x{{product.quantity}}</ion-text>
+    </div>
+    <ion-card  [id]="id" class="product-card" (click)="openCard(product, id)">
+        <ion-card-header *ngIf="!product.parent" style="padding-bottom: 10px; padding-right: 5px;">
+            <div [ngClass]="selected === product.id ? 'selectedTitle' : 'not-selected-title' ">
+                <ion-text class="ion-text-center">
+                    {{product.name}}
+                </ion-text>
+            </div>
+        </ion-card-header>
+        <ion-card-content [ngClass]="selected === product.id ? 'selected' : 'not-selected' ">
+            <ion-row class="ion-justify-content-center" *ngIf="selected === product.id">
+                <ion-col size="6">
+                    <ion-row>
+                        <div>
+                            <ion-img [src]="product.image">
+                            </ion-img>
+                        </div>
+                    </ion-row>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size="8">
+                    <ion-row style="padding-bottom: 5px;">
+                        {{product.price}}
+                    </ion-row>
+                    <ion-row>
+                        {{product.description}}
+                    </ion-row>
+                </ion-col>
+                <ion-col *ngIf="selected !== product.id" size="4">
+                    <ion-row>
+                        <div>
+                            <ion-img [src]="product.image">
+                            </ion-img>
+                        </div>
+                    </ion-row>
+                </ion-col>
+            </ion-row>
+            <ion-row *ngIf="!product?.parent && selected === product.id" class="ion-justify-content-center">
+                <ion-col (click)="subtractOrderItem(product)"  size="6">
+                    <div class="ion-text-center"
+                         style="height: 150px; width: 150px; background: #BC0000; line-height: 150px;  border-radius: 8px;">
+                        <ion-text style="font-size: 50px; color: white;">
+                            -
+                        </ion-text>
+                    </div>
+                </ion-col>
+                <ion-col (click)="addItem(product)" size="6">
+                    <div class="ion-text-center"
+                         style="height: 150px; width: 150px; background: #62D02E; line-height: 150px; border-radius: 8px;">
+                        <ion-text style="font-size: 50px; color: white;">
+                            +
+                        </ion-text>
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-card-content>
+        <ion-row *ngIf="product.parent" class="top-level-background">
+            <ion-text class="ion-text-center top-level-heading">
+                {{product?.name}}
+            </ion-text>
+        </ion-row>
+    </ion-card>
+</ion-row>
+<!--<ion-row>-->
+<!--    <ion-card>-->
+<!--        -->
+<!--    </ion-card>-->
+<!--</ion-row>-->
+

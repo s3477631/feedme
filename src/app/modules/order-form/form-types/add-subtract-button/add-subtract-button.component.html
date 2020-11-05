@@ -1,0 +1,10 @@
+<div>
+    <div class="option-label">{{orderItem?.label}}</div>
+    <div  class="option-actions">
+        <ion-icon class="remove-item" (click)="decreaseItem(orderItem?.id)" name="remove-circle-outline"></ion-icon>
+        <ng-container [formGroup]="parentForm">
+            <input class="qty-output" [formControlName]="orderItem?.id" [value]="orderItem?.value" readonly/>
+        </ng-container>
+        <ion-icon class="add-item" (click)="increaseItem(orderItem?.id)" name="add-circle-outline"></ion-icon>
+    </div>
+</div>

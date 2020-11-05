@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {MenuExplorerService} from '../../../services/menu-explorer.service';
 
 @Component({
   selector: 'app-drink-list',
@@ -7,8 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DrinkListComponent implements OnInit {
 
-  constructor() { }
+  constructor(private menuExplorerService: MenuExplorerService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.menuExplorerService.getDrinkMenu();
+  }
 
 }

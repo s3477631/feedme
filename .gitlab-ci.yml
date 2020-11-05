@@ -1,0 +1,46 @@
+default:
+  image: registry.gitlab.com/sherper/aws-ci-deploy
+
+stages:
+  - install
+  - build 
+  - deploy
+
+variables:
+  npm_config_cache: "$CI_PROJECT_DIR/.npm"
+
+cache:
+  key: "nm_v1_$CI_BUILD_REF_NAME"
+  paths:
+    - node_modules
+
+npm_install:
+  stage: install
+  script:
+    - npm install
+
+mobile_build:
+  stage: build
+  script:
+    - npm run build
+  artifacts:
+    name: mobile-app
+    paths:
+      - target/*
+
+deploy_dev:
+  environment: Development
+  extends: .deploy_aws
+
+
+.deploy_aws:
+  stage: deploy
+  variables:
+    BUCKET_NAME: $S3_BUCKET_NAME
+  tags:
+    - linux
+  script:
+    - aws s3 rm s3://$BUCKET_NAME/frontend/$CI_COMMIT_REF_NAME/  --recursive
+    - aws s3 cp target s3://$BUCKET_NAME/frontend/$CI_COMMIT_REF_NAME/ --no-progress --recursive --acl public-read
+
+when: manual

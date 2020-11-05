@@ -1,0 +1,16 @@
+.size-options{
+  background: #48A4E7;
+  color: white;
+  text-align: end;
+  margin-right: 8px;
+  margin-top: 5px;
+  padding-top: 5px;
+  padding-right: 8px;
+  padding-bottom: 5px;
+  margin-bottom: -35px;
+  font-size: 22px;
+  border-radius: 5px;
+}
+ion-select::part(icon) {
+  visibility: hidden !important;
+}

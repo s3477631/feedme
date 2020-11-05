@@ -1,0 +1,148 @@
+.card-list {
+  margin-top: 30px;
+}
+
+.card-container {
+  background: white;
+  margin-left: 12px;
+  margin-right: 12px;
+  padding-top: 10px;
+  padding-right: 10px;
+  border: 1px solid #48A4E7;
+  margin-top: 40px;
+  border-top-right-radius: 50px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 45px;
+  //border-bottom-right-radius: 100px;
+}
+
+.card-content-container{
+  display: flex;
+}
+
+
+
+.close-button{
+  position: absolute;
+  top: 15px;
+  left: 0px;
+  padding: 5px;
+  background: #E42E2E;
+  border-radius: 50%;
+  border: 1px solid #48A4E7;
+}
+.close-button-icon{
+  font-size: 32px;
+}
+
+.card-options-panel{
+  overflow-y: scroll;
+  max-height: 27em;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  box-sizing: border-box;
+  box-shadow: inset -4px 4px 10px #0d163b;
+  border-right: 1px solid #48A4E7;
+  border-top: 1px solid #48A4E7;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 45px;
+}
+.size-options{
+  background: #48A4E7;
+  color: white;
+  text-align: end;
+  margin-right: 8px;
+  margin-top: 5px;
+  padding-top: 5px;
+  padding-right: 8px;
+  padding-bottom: 5px;
+  margin-bottom: -35px;
+  font-size: 22px;
+  border-radius: 5px;
+}
+ion-select::part(icon) {
+  visibility: hidden !important;
+}
+
+.add-item{
+  color: black;
+  font-size: 35px;
+}
+.remove-item{
+  color: black;
+  font-size: 35px;
+}
+.option-label{
+  font-size: 22px;
+  color: black;
+  text-align: center;
+}
+.qty-output{
+  color: black;
+  font-size: 32px;
+}
+
+.option-actions{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.card-description {
+  display: flex;
+}
+
+.card-title {
+  color: black;
+  font-weight: 500;
+  font-size: 22px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.card-body {
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  color: black;
+}
+
+.card-description-panel{
+  display: flex;
+  flex-direction: column;
+  padding-left: 8px;
+  padding-bottom: 12px;
+  width: 50%;
+}
+.options-container{
+  padding-left: 8px;
+}
+.options-title{
+  padding-top: 4px;
+  padding-bottom: 4px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  font-size: 22px;
+  background: #ef6c26;
+}
+
+.card-image {
+  border-top-right-radius: 35px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 10px;
+  max-width: 190px;
+  max-height: 190px;
+}
+.add-to-order-button{
+  background: #0EC615;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+  font-size: 22px;
+  border-bottom-right-radius: 25px;
+}
+ion-content{
+  --background: transparent;
+}
