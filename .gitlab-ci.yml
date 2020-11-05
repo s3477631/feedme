@@ -2,8 +2,6 @@ default:
   image: registry.gitlab.com/sherper/aws-ci-deploy
 
 stages:
-  - install
-  - build
   - deploy
 
 variables:
@@ -37,8 +35,6 @@ deploy_dev:
   stage: deploy
   variables:
     BUCKET_NAME: $S3_BUCKET_NAME
-  tags:
-    - linux
   script:
     - aws s3 rm s3://$BUCKET_NAME/frontend/$CI_COMMIT_REF_NAME/  --recursive
     - aws s3 cp target s3://$BUCKET_NAME/frontend/$CI_COMMIT_REF_NAME/ --no-progress --recursive --acl public-read
