@@ -1,6 +1,6 @@
 {
   "/": {
-    "target": "http://devinfeedmebucket.s3-website-ap-southeast-2.amazonaws.com",
+    "target": "http://devinfeedmebucket.s3-website-ap-southeast-2.amazonaws.com/frontend/",
     "secure": false,
     "loglevel": "debug"
   }
