@@ -13,11 +13,12 @@ import {InterceptorsModule} from './interceptor/interceptor.module';
 import {HttpClientModule} from '@angular/common/http';
 import {NgxWebstorageModule} from 'ngx-webstorage';
 import {NgrxModule} from './store/module/ngrx.module';
+import {HomeComponent} from './modules/home/home.component';
 
 
 
 @NgModule({
-    declarations: [AppComponent],
+    declarations: [AppComponent, HomeComponent],
     entryComponents: [],
     imports: [BrowserModule, IonicModule.forRoot(),
         HttpClientModule,

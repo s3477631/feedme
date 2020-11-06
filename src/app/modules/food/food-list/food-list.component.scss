@@ -21,6 +21,11 @@ swiper {
   width: 100%;
 }
 
+.vertical-flex-spacer{
+  flex: 1;
+  display: flex;
+}
+
 .group-label {
   background: rgba(0, 166, 237, 0.85);
   border-bottom-left-radius: 15px;
@@ -39,9 +44,7 @@ swiper {
 .swiper-container-wrapped {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
   height: 100%;
-  margin-top: 20px;
 }
 
 .swiper-container {
@@ -81,7 +84,6 @@ swiper {
 }
 
 .card-image-container {
-  width: 200px;
   display: flex;
   justify-content: flex-end;
 }
@@ -122,6 +124,6 @@ swiper {
 .card-image {
   border-top-right-radius: 45px;
   border-bottom-left-radius: 15px;
-  min-width: 200px;
+  max-width: 40vw;
 }
 

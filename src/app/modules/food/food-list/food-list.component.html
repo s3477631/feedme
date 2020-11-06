@@ -17,15 +17,16 @@
 <!--</ion-list>-->
 
 <ng-container style="background: #F0EFF4; height: 100%;">
-
+    <div class="vertical-flex-spacer"></div>
     <div class="swiper-container-wrapped">
-
-        <ion-card style="margin-top: 30px; margin-bottom: 8px;" *ngIf="!menuItems">
+        <ion-card *ngIf="!menuItems">
             <!--            <div class="price-text">-->
             <!--                $10.00-->
             <!--            </div>-->
             <img src="../../assets/dinner.jpeg"/>
         </ion-card>
+        <div class="vertical-flex-spacer"></div>
+        <div class="vertical-flex-spacer"></div>
         <div class="card-container" (click)="presentModal()" *ngIf="menuItems">
             <div class="card-description">
                 <div class="card-header">
@@ -44,8 +45,8 @@
                 <img class="card-image"
                      src="https://images.pexels.com/photos/1260968/pexels-photo-1260968.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"/>
             </div>
-
         </div>
+        <div class="vertical-flex-spacer"></div>
 
 
         <!--            <div class="middle-bar">-->
@@ -90,7 +91,7 @@
                 <!-- Add Pagination -->
                 <div class="swiper-pagination"></div>
             </swiper>
-
+            <div class="vertical-flex-spacer"></div>
 
         </ng-container>
 
