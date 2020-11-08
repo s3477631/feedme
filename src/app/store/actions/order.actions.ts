@@ -38,6 +38,10 @@ export const loadMenuGroupSuccess = createAction(OrderActionsEnum.LOAD_MENU_GROU
     props<{ menuGroupItems: GroupingDto[] }>()
 );
 
+export const loadMenuGroupTitle = createAction(OrderActionsEnum.LOAD_GROUP_NAME_SUCCESS,
+    props<{ groupName: string }>()
+);
+
 export const clearMenuGroups = createAction(OrderActionsEnum.CLEAR_MENU_GROUP);
 export const clearMenuGroupSuccess = createAction(OrderActionsEnum.CLEAR_MENU_GROUP_SUCCESS);
 

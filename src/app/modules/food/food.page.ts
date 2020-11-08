@@ -13,6 +13,7 @@ export class FoodPage implements OnInit {
     public showBack: boolean;
     public menuItems;
     public menuGroups;
+    public groupTitle: string;
 
     constructor(public orderStateFacade: OrderStateFacade,
                 public alertController: AlertController,
@@ -29,6 +30,9 @@ export class FoodPage implements OnInit {
         this.orderStateFacade.menuItems.pipe(tap(menuItems => {
             this.menuItems = menuItems;
             this.cd.detectChanges();
+        })).subscribe();
+        this.orderStateFacade.groupTitle.pipe(tap(groupTitle => {
+            this.groupTitle = groupTitle;
         })).subscribe();
 
     }
@@ -61,7 +65,22 @@ export class FoodPage implements OnInit {
 
 
     public goBack(): void {
-        this.orderStateFacade.loadMenuGroups('groups-food');
+        console.log(this.groupTitle);
+        if (this.groupTitle === 'Drinks') {
+            this.orderStateFacade.loadMenuGroups('groups-drink');
+        } else if (this.groupTitle === 'Food') {
+            this.orderStateFacade.loadMenuGroups('groups-food');
+        }
+        // @ts-ignore
+        // this.orderStateFacade.groupTitle.pipe((groupTitle) => {
+        //     // @ts-ignore
+        //     console.log(groupTitle)
+        //     if (groupTitle === 'drinks') {
+        //         this.orderStateFacade.loadMenuGroups('groups-drinks');
+        //     } else {
+        //         this.orderStateFacade.loadMenuGroups('groups-food');
+        //     }
+        // }).subscribe();
     }
 
     getMenuItem(menuItems: any) {

@@ -6,6 +6,7 @@ export interface OrderState {
     customerOrder: ProductDto[];
     orderItemQuantity: number;
     totalOrderCost: number;
+    groupName: string;
     menuGroupItems: GroupingDto[];
 }
 
@@ -14,5 +15,6 @@ export const initialOrderState: OrderState = {
     menuItems: undefined,
     customerOrder: undefined,
     orderItemQuantity: 0,
-    totalOrderCost: 0
+    totalOrderCost: 0,
+    groupName: undefined
 };

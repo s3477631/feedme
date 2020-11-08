@@ -11,7 +11,7 @@ import {tap} from 'rxjs/operators';
 export class DrinkPage implements OnInit {
     public menuGroups;
     public menuItems;
-
+    public groupTitle: string;
     constructor(public orderStateFacade: OrderStateFacade, public cd: ChangeDetectorRef) {
     }
 
@@ -24,6 +24,9 @@ export class DrinkPage implements OnInit {
         this.orderStateFacade.menuItems.pipe(tap(menuItems =>{
             this.menuItems = menuItems;
             this.cd.detectChanges();
+        })).subscribe();
+        this.orderStateFacade.groupTitle.pipe(tap(groupTitle => {
+            this.groupTitle = groupTitle;
         })).subscribe();
     }
 

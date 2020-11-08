@@ -36,12 +36,21 @@ export class OrderEffects {
     ));
     public loadMenuGroupList$ = createEffect(() => this.actions.pipe(
         ofType(OrderActions.loadMenuGroups),
-        switchMap((action) =>  this.loadMenuGroups(action.groupName).pipe(
-                map((activity) => ({type: OrderActionsEnum.LOAD_MENU_GROUPS_SUCCESS, menuGroupItems: activity})),
-                catchError((errorParam) => {
-                    return EMPTY;
-                })
-            ))
+        switchMap((action) => this.loadMenuGroups(action.groupName).pipe(
+            map((activity) => ({type: OrderActionsEnum.LOAD_MENU_GROUPS_SUCCESS, menuGroupItems: activity})),
+            catchError((errorParam) => {
+                return EMPTY;
+            })
+        ))
+    ));
+    public loadGroupName$ = createEffect(() => this.actions.pipe(
+        ofType(OrderActions.loadMenuGroups),
+        switchMap((action) => this.addGroupNom(action.groupName).pipe(
+            map((act) => ({type: OrderActionsEnum.LOAD_GROUP_NAME_SUCCESS, groupName: act})),
+            catchError((error) => {
+                return EMPTY;
+            })
+        ))
     ));
     public deselectItems$ = createEffect(() => this.actions.pipe(
         ofType(OrderActions.clearMenuGroups),
@@ -112,7 +121,6 @@ export class OrderEffects {
 
     private loadMenuGroups(groupName): Observable<GroupingDto[]> {
         const menuGroups = this.menuService.getMenuGroups(groupName);
-        menuGroups.subscribe(val => console.log(val));
         return menuGroups;
     }
 
@@ -151,6 +159,14 @@ export class OrderEffects {
 
         } else if (currentOrder === undefined) {
             return firstItem;
+        }
+    }
+
+    private addGroupNom(groupName): Observable<string> {
+        if (groupName === 'groups-drink') {
+            return of('Drinks');
+        } else {
+            return of('Food');
         }
     }
 

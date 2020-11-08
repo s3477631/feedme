@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {OrderStateFacade} from '../../facade/order-state.facade';
 import {ActivatedRoute, Router} from '@angular/router';
 
@@ -10,7 +10,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class TabsPage implements OnInit {
     public selectedMenuItem = 'food';
 
-    constructor(public orderStateFacade: OrderStateFacade, public activatedRoute: ActivatedRoute, public router: Router) {
+    constructor(public orderStateFacade: OrderStateFacade,
+                public cd: ChangeDetectorRef,
+                public activatedRoute: ActivatedRoute, public router: Router) {
     }
 
     ngOnInit() {
@@ -26,7 +28,6 @@ export class TabsPage implements OnInit {
         this.orderStateFacade.clearGroupOptions();
         this.selectedMenuItem = page;
         this.orderStateFacade.loadMenuGroups(`groups-${page}`);
-        this.router.navigate([`${page}`], {relativeTo: this.activatedRoute});
     }
 
     selectedOption(selected: string): string {

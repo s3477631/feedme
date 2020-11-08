@@ -21,6 +21,7 @@ export class OrderStateFacade {
     public totalOrder: Observable<number>;
     public menuItems: Observable<ProductDto[]>;
     public menuGroupItems: Observable<GroupingDto[]>;
+    public groupTitle: Observable<string>;
 
     constructor(private store: Store<OrderState>) {
     }
@@ -31,6 +32,7 @@ export class OrderStateFacade {
         this.totalOrder = this.store.pipe(select(orderSelectors.totalOrderCost));
         this.menuItems = this.store.pipe(select(orderSelectors.menuListSelector));
         this.menuGroupItems = this.store.pipe(select(orderSelectors.menuGroupItems));
+        this.groupTitle = this.store.pipe(select(orderSelectors.groupTitle));
     }
 
     public addOrder(newOrder: ProductDto): void {

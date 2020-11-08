@@ -3,6 +3,7 @@ export const enum OrderActionsEnum {
     LOAD_MENU_SUCCESS = '[Order Action] Load menu items success',
     LOAD_MENU_GROUPS = '[Order Action] Load menu group items',
     LOAD_MENU_GROUPS_SUCCESS = '[Order Action] Load menu group items success',
+    LOAD_GROUP_NAME_SUCCESS = '[Order Action] Load group name success',
     CLEAR_MENU_GROUP = '[Order Action] Clear menu group',
     CLEAR_MENU_GROUP_SUCCESS = '[Order Action] Clear menu group success',
     ADD_ORDER_ITEM = '[Order Action] Load order item',

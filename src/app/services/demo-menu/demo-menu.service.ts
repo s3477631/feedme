@@ -113,12 +113,14 @@ export class DemoMenuService {
             }];
         return drinkGroups;
     }
+
     private getDrink(): ProductDto[] {
         const drink = [{
             id: '1',
             name: 'Coca-cola',
             price: '6.00',
             quantity: 1,
+            groupId: 104,
             description: '250ml Refreshing Beverage',
             image: 'https://shortysliquor.com.au/media/catalog/product/cache/2fcc3329aef4183c8e06230d7e06f8f3/5/6/569-2.png',
         }, {
@@ -126,16 +128,44 @@ export class DemoMenuService {
             name: 'Fanta',
             price: '5.00',
             quantity: 1,
+            groupId: 104,
             description: '250ml Refreshing Beverage',
-            image: 'https://www.coca-cola.com.my/content/dam/journey/my/en/private/brands/hero-598x336/Fanta_Orange.png',
+            image: 'https://shortysliquor.com.au/media/catalog/product/cache/2fcc3329aef4183c8e06230d7e06f8f3/f/a/fanta_250ml_climline.png',
         }, {
             id: '3',
             name: 'Orange Juice',
             price: '5.50',
             quantity: 1,
+            groupId: 104,
             description: '250ml Refreshing Beverage',
             image: 'https://shortysliquor.com.au/media/catalog/product/cache/2fcc3329aef4183c8e06230d7e06f8f3/3/0/300_1.png',
-        }];
+        },
+            {
+                id: '1',
+                name: 'Carlsberg',
+                price: '6.00-$14.00',
+                quantity: 1,
+                groupId: 101,
+                description: 'pots, schooners or pints of Carlsberg',
+                image: 'https://ecampusontario.pressbooks.pub/app/uploads/sites/520/2019/12/2129H_0-300x296.jpg',
+            }, {
+                id: '2',
+                name: '4x Gold',
+                price: '4.00-$9.00',
+                quantity: 1,
+                groupId: 101,
+                description: 'pots, schooners or pints of 4x Gold',
+                image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRn5Rr-L4BqiPS4X7-_dZB-meEGjarMZT6QGQ&usqp=CAU',
+            }, {
+                id: '3',
+                name: 'Stella Artois',
+                price: '8.00-$15.00',
+                quantity: 1,
+                groupId: 101,
+                description: 'pots, schooners or pints of Stella Artois',
+                image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS142FHKyy6mADut_kysTaZW2LeiPux7LVy3Q&usqp=CAU',
+            }
+        ];
         return drink;
     }
 
@@ -197,8 +227,13 @@ export class DemoMenuService {
         return food;
     }
 
-    private getGroupItems(groupId: string): ProductDto[]{
-        return this.getFood().filter(group => group.groupId === parseInt(groupId, 0));
+    private getGroupItems(groupId: string): ProductDto[] {
+        // replace with a better mapping
+        if (groupId.length < 3) {
+            return this.getFood().filter(group => group.groupId === parseInt(groupId, 0));
+        } else {
+            return this.getDrink().filter(group => group.groupId === parseInt(groupId, 0));
+        }
     }
 
     private getConfirmation(processOrder) {
@@ -220,7 +255,7 @@ export class DemoMenuService {
         if (result == null) {
             console.error('Demo route not matched: ' + urlWithParams);
         } else {
-            console.info(result);
+            console.table(result);
         }
         return result;
     }

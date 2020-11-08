@@ -1,6 +1,7 @@
 import {createFeatureSelector, createSelector} from '@ngrx/store';
 import {OrderState} from '../state/order.state';
 
+
 export const selectOrderState = createFeatureSelector<OrderState>('orderState');
 
 export const menuListSelector = createSelector(selectOrderState,
@@ -23,3 +24,6 @@ export const menuGroupItems = createSelector(selectOrderState,
     (orderState: OrderState) => orderState.menuGroupItems
 );
 
+export const groupTitle = createSelector(selectOrderState,
+    (orderState: OrderState) => orderState.groupName
+);

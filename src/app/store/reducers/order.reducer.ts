@@ -46,7 +46,13 @@ const orderStateReducer = createReducer(initialOrderState,
             ...state,
             menuGroupItems: undefined
         };
-    }))
+    })),
+    on(OrderActions.loadMenuGroupTitle, ((state, action) => {
+        return {
+            ...state,
+            groupName: action.groupName
+        };
+    })),
 );
 
 
