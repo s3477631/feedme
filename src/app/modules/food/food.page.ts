@@ -71,16 +71,6 @@ export class FoodPage implements OnInit {
         } else if (this.groupTitle === 'Food') {
             this.orderStateFacade.loadMenuGroups('groups-food');
         }
-        // @ts-ignore
-        // this.orderStateFacade.groupTitle.pipe((groupTitle) => {
-        //     // @ts-ignore
-        //     console.log(groupTitle)
-        //     if (groupTitle === 'drinks') {
-        //         this.orderStateFacade.loadMenuGroups('groups-drinks');
-        //     } else {
-        //         this.orderStateFacade.loadMenuGroups('groups-food');
-        //     }
-        // }).subscribe();
     }
 
     getMenuItem(menuItems: any) {

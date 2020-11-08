@@ -11,6 +11,8 @@ import {ProductDto} from '../../../model/product.dto';
 })
 export class ItemListComponent implements OnInit {
     @Input()
+    groupTitle: string;
+    @Input()
     menuItems;
     @Input()
     menuGroups;

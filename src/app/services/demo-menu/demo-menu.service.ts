@@ -52,7 +52,7 @@ export class DemoMenuService {
         const foodGroups = [{
             id: '1',
             name: 'mains',
-            image: 'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/steak-and-chips-f385bf3.jpg?quality=90&resize=504,458',
+            image:  'https://images.pexels.com/photos/299348/pexels-photo-299348.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
             groupId: 1,
             parent: true
         },
@@ -60,21 +60,21 @@ export class DemoMenuService {
                 id: '2',
                 name: 'entree',
                 groupId: 2,
-                image: 'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/steak-and-chips-f385bf3.jpg?quality=90&resize=504,458',
+                image: 'https://images.pexels.com/photos/5639416/pexels-photo-5639416.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
                 parent: true
             },
             {
                 id: '3',
                 name: 'lunch',
                 groupId: 3,
-                image: 'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/steak-and-chips-f385bf3.jpg?quality=90&resize=504,458',
+                image: 'https://images.pexels.com/photos/1639565/pexels-photo-1639565.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
                 parent: true
             },
             {
                 id: '4',
                 name: 'dessert',
                 groupId: 4,
-                image: 'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/steak-and-chips-f385bf3.jpg?quality=90&resize=504,458',
+                image: 'https://images.pexels.com/photos/808941/pexels-photo-808941.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
                 parent: true
             }
 
@@ -94,7 +94,7 @@ export class DemoMenuService {
                 id: '2',
                 name: 'Wine',
                 groupId: 102,
-                image: 'https://images.unsplash.com/photo-1581035116078-04cb00f8f4fa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1952&q=80',
+                image: 'https://images.pexels.com/photos/3756623/pexels-photo-3756623.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
                 parent: true
             },
             {
@@ -156,14 +156,6 @@ export class DemoMenuService {
                 groupId: 101,
                 description: 'pots, schooners or pints of 4x Gold',
                 image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRn5Rr-L4BqiPS4X7-_dZB-meEGjarMZT6QGQ&usqp=CAU',
-            }, {
-                id: '3',
-                name: 'Stella Artois',
-                price: '8.00-$15.00',
-                quantity: 1,
-                groupId: 101,
-                description: 'pots, schooners or pints of Stella Artois',
-                image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS142FHKyy6mADut_kysTaZW2LeiPux7LVy3Q&usqp=CAU',
             }
         ];
         return drink;
