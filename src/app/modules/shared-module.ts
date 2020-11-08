@@ -7,6 +7,8 @@ import {GroupItemsComponent} from './components/group-items/group-items.componen
 import {OrderFormComponent} from './order-form/order-form.component';
 import {AddSubtractButtonComponent} from './order-form/form-types/add-subtract-button/add-subtract-button.component';
 import {DropDownComponent} from './order-form/form-types/drop-down/drop-down.component';
+import {ItemListComponent} from './components/item-list/item-list.component';
+import {NgxUsefulSwiperModule} from 'ngx-useful-swiper';
 
 
 
@@ -15,6 +17,7 @@ import {DropDownComponent} from './order-form/form-types/drop-down/drop-down.com
         IonicModule,
         CommonModule,
         FormsModule,
+        NgxUsefulSwiperModule,
         ReactiveFormsModule,
     ],
     declarations: [
@@ -22,13 +25,16 @@ import {DropDownComponent} from './order-form/form-types/drop-down/drop-down.com
         GroupItemsComponent,
         OrderFormComponent,
         AddSubtractButtonComponent,
-        DropDownComponent
+        DropDownComponent,
+        ItemListComponent
     ],
     exports: [
+        NgxUsefulSwiperModule,
         ProductComponent,
         GroupItemsComponent,
         OrderFormComponent,
-        AddSubtractButtonComponent
+        AddSubtractButtonComponent,
+        ItemListComponent
     ]
 })
 export class SharedModule {}

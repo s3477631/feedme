@@ -45,11 +45,15 @@ export class OrderStateFacade {
 
     public loadMenuItems(group: number): void {
         this.store.dispatch({type: OrderActionsEnum.LOAD_MENU, groupId: group});
-        this.store.dispatch({type: OrderActionsEnum.CLEAR_MENU_GROUP});
+        this.clearGroupOptions();
     }
 
 
-    public loadMenuGroups(): void {
-        this.store.dispatch({type: OrderActionsEnum.LOAD_MENU_GROUPS});
+    public loadMenuGroups(group: string): void {
+        this.store.dispatch({type: OrderActionsEnum.LOAD_MENU_GROUPS, groupName: group});
+    }
+
+    public clearGroupOptions() {
+        this.store.dispatch({type: OrderActionsEnum.CLEAR_MENU_GROUP});
     }
 }

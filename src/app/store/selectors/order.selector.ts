@@ -22,3 +22,4 @@ export const totalOrderCost = createSelector(selectOrderState,
 export const menuGroupItems = createSelector(selectOrderState,
     (orderState: OrderState) => orderState.menuGroupItems
 );
+

@@ -8,8 +8,6 @@ import {GroupingDto} from '../../model/grouping.dto';
 export class DemoMenuService {
     mockResponseMap = {
         'GET': {
-            'api/drink': (): ProductDto[] => this.getDrink(),
-            'api/food': (): ProductDto[] => this.getFood(),
             'POST': {
                 '/core/api/submit-order': (body) => {
                     return this.getConfirmation(body.processOrder);
@@ -22,11 +20,6 @@ export class DemoMenuService {
 
     mockResponseRegexes = [
         {
-            regex: /api\/drink/,
-            response: (args, body) => {
-                return this.getDrink();
-            }
-        }, {
             regex: /api\/food/,
             response: (args, body) => {
                 return this.getFood();
@@ -39,7 +32,13 @@ export class DemoMenuService {
             }
         },
         {
-            regex: /api\/itemed-food\/(.*)/,
+            regex: /api\/groups-drink/,
+            response: (args, body) => {
+                return this.drinkGroups();
+            }
+        },
+        {
+            regex: /api\/get-first-child-item\/(.*)/,
             response: (args, body) => {
                 return this.getGroupItems(args[1]);
             }
@@ -83,25 +82,56 @@ export class DemoMenuService {
         return foodGroups;
     }
 
+    private drinkGroups(): GroupingDto[] {
+        const drinkGroups = [{
+            id: '1',
+            name: 'Beer',
+            image: 'https://images.unsplash.com/photo-1441985969846-3e7c90531139?ixlib=rb-1.2.1&auto=format&fit=crop&w=2250&q=80',
+            groupId: 101,
+            parent: true
+        },
+            {
+                id: '2',
+                name: 'Wine',
+                groupId: 102,
+                image: 'https://images.unsplash.com/photo-1581035116078-04cb00f8f4fa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1952&q=80',
+                parent: true
+            },
+            {
+                id: '3',
+                name: 'Spirits',
+                groupId: 103,
+                image: 'https://images.unsplash.com/photo-1509157774525-cd6d6cbf00a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80',
+                parent: true
+            },
+            {
+                id: '4',
+                name: 'Soft Drink',
+                groupId: 104,
+                image: 'https://images.unsplash.com/photo-1527960471264-932f39eb5846?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80',
+                parent: true
+            }];
+        return drinkGroups;
+    }
     private getDrink(): ProductDto[] {
         const drink = [{
             id: '1',
             name: 'Coca-cola',
-            price: '$6.00',
+            price: '6.00',
             quantity: 1,
             description: '250ml Refreshing Beverage',
             image: 'https://shortysliquor.com.au/media/catalog/product/cache/2fcc3329aef4183c8e06230d7e06f8f3/5/6/569-2.png',
         }, {
             id: '2',
             name: 'Fanta',
-            price: '$5.00',
+            price: '5.00',
             quantity: 1,
             description: '250ml Refreshing Beverage',
             image: 'https://www.coca-cola.com.my/content/dam/journey/my/en/private/brands/hero-598x336/Fanta_Orange.png',
         }, {
             id: '3',
             name: 'Orange Juice',
-            price: '$5.50',
+            price: '5.50',
             quantity: 1,
             description: '250ml Refreshing Beverage',
             image: 'https://shortysliquor.com.au/media/catalog/product/cache/2fcc3329aef4183c8e06230d7e06f8f3/3/0/300_1.png',
@@ -113,7 +143,7 @@ export class DemoMenuService {
         const food = [{
             id: '1',
             name: 'Steak & Chips',
-            price: '$16.00',
+            price: '16.00',
             groupId: 1,
             quantity: 1,
             description: '250gm Angus Steak with home cooked chips. It will fill you up!',
@@ -121,7 +151,7 @@ export class DemoMenuService {
         }, {
             id: '2',
             name: 'Pizza',
-            price: '$15.00',
+            price: '15.00',
             groupId: 1,
             quantity: 1,
             description: 'Authentic Italian Cuisine made by only the best chefs!',
@@ -129,7 +159,7 @@ export class DemoMenuService {
         }, {
             id: '3',
             name: 'Burger',
-            price: '$15.50',
+            price: '15.50',
             groupId: 1,
             quantity: 1,
             description: 'Chicken burger made with love, lettuce and plenty of special sauce',
@@ -138,7 +168,7 @@ export class DemoMenuService {
             {
                 id: '104',
                 name: 'Dozen Freshly Shucked Oysters',
-                price: '$38.00',
+                price: '38.00',
                 quantity: 1,
                 groupId: 2,
                 description: 'Traditional kilpatrick oysters with bacon pieces w/ a twist of lemon  ',
@@ -147,7 +177,7 @@ export class DemoMenuService {
             {
                 id: '105',
                 name: 'Garlic Bread',
-                price: '$11.00',
+                price: '11.00',
                 quantity: 1,
                 groupId: 2,
                 description: 'Home-made garlic bread with fresh gloves from the garden out back.',
@@ -156,7 +186,7 @@ export class DemoMenuService {
             {
                 id: '106',
                 name: 'Arancini Balls',
-                price: '$18.50',
+                price: '18.50',
                 quantity: 1,
                 groupId: 2,
                 description: 'Arancini Balls from Grandma`s special recipe',

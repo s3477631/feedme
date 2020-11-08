@@ -30,7 +30,9 @@ export const totalOrderCostSuccess = createAction(OrderActionsEnum.TOTAL_ORDER_C
     props<{ totalOrderCost: number }>()
 );
 
-export const loadMenuGroups = createAction(OrderActionsEnum.LOAD_MENU_GROUPS);
+export const loadMenuGroups = createAction(OrderActionsEnum.LOAD_MENU_GROUPS,
+    props<{ groupName: string }>()
+);
 
 export const loadMenuGroupSuccess = createAction(OrderActionsEnum.LOAD_MENU_GROUPS_SUCCESS,
     props<{ menuGroupItems: GroupingDto[] }>()
@@ -46,3 +48,4 @@ export const loadMenuItems = createAction(OrderActionsEnum.LOAD_MENU,
 export const loadMenuItemSuccess = createAction(OrderActionsEnum.LOAD_MENU_SUCCESS,
     props<{ menuList: ProductDto[] }>()
 );
+

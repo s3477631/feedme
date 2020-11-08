@@ -19,6 +19,7 @@
 <ng-container style="background: #F0EFF4; height: 100%;">
     <div class="vertical-flex-spacer"></div>
     <div class="swiper-container-wrapped">
+        <div class="vertical-flex-spacer"></div>
         <ion-card *ngIf="!menuItems">
             <!--            <div class="price-text">-->
             <!--                $10.00-->
@@ -26,7 +27,7 @@
             <img src="../../assets/dinner.jpeg"/>
         </ion-card>
         <div class="vertical-flex-spacer"></div>
-        <div class="vertical-flex-spacer"></div>
+
         <div class="card-container" (click)="presentModal()" *ngIf="menuItems">
             <div class="card-description">
                 <div class="card-header">
@@ -46,7 +47,7 @@
                      src="https://images.pexels.com/photos/1260968/pexels-photo-1260968.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"/>
             </div>
         </div>
-        <div class="vertical-flex-spacer"></div>
+        <div class="vertical-flex-spacer" *ngIf="menuItems"></div>
 
 
         <!--            <div class="middle-bar">-->
@@ -78,7 +79,7 @@
                 <div class="swiper-wrapper">
                     <div class="swiper-slide" *ngFor="let menuItem of menuItems">
                         <div class="price-label-container">
-                            <div class="price-label">$10.00</div>
+                            <div class="price-label">${{menuItem.price}}</div>
                         </div>
                         <img (click)="selectMenuGroup(menuItem.groupId)"
                              [src]="menuItem?.image"/>

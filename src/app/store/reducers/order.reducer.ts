@@ -42,7 +42,6 @@ const orderStateReducer = createReducer(initialOrderState,
         };
     }),
     on(OrderActions.clearMenuGroupSuccess, ((state, action) => {
-        console.log(action)
         return {
             ...state,
             menuGroupItems: undefined

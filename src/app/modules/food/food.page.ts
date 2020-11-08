@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {OrderStateFacade} from '../../facade/order-state.facade';
 import {AlertController} from '@ionic/angular';
 import {LocalStorage, LocalStorageService, SessionStorage} from 'ngx-webstorage';
+import {tap} from 'rxjs/operators';
 
 @Component({
     selector: 'app-tab-food',
@@ -10,26 +11,29 @@ import {LocalStorage, LocalStorageService, SessionStorage} from 'ngx-webstorage'
 })
 export class FoodPage implements OnInit {
     public showBack: boolean;
+    public menuItems;
+    public menuGroups;
 
     constructor(public orderStateFacade: OrderStateFacade,
                 public alertController: AlertController,
-                ) {
+                public cd: ChangeDetectorRef
+    ) {
     }
 
-    public ngOnInit() {
+    public ngOnInit(): void {
         this.orderStateFacade.initializeListeners();
-        this.orderStateFacade.loadMenuGroups();
-        this.orderStateFacade.menuGroupItems.subscribe((items) => {
-            console.log(items);
-            //     if (items[0].parent) {
-            //         this.showBack = true;
-            //     } else {
-            //         this.showBack = false;
-            //     }
-            // }
-            // );
-        });
+        this.orderStateFacade.menuGroupItems.pipe(tap(menuGroups => {
+            this.menuGroups = menuGroups;
+            this.cd.detectChanges();
+        })).subscribe();
+        this.orderStateFacade.menuItems.pipe(tap(menuItems => {
+            this.menuItems = menuItems;
+            this.cd.detectChanges();
+        })).subscribe();
+
     }
+
+
     // async presentAlertConfirm() {
     //     const alert = await this.alertController.create({
     //         cssClass: 'my-custom-class',
@@ -57,6 +61,11 @@ export class FoodPage implements OnInit {
 
 
     public goBack(): void {
-        this.orderStateFacade.loadMenuGroups();
+        this.orderStateFacade.loadMenuGroups('groups-food');
+    }
+
+    getMenuItem(menuItems: any) {
+        console.log(menuItems);
+        this.orderStateFacade.loadMenuItems(menuItems);
     }
 }

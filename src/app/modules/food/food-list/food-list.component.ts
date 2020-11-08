@@ -58,90 +58,90 @@ export class FoodListComponent implements OnInit {
         return await modal.present();
     }
 
-    public addItem(order: ProductDto): void {
-        const existingOrder = this.localStorage.retrieve('order');
-        if (existingOrder !== null) {
-            const orderItems = JSON.parse(existingOrder);
-            const newOrder = {
-                id: order.id,
-                quantity: order.quantity,
-                name: order.name,
-                description: order.description,
-                image: order.image,
-                price: order.price
-            };
-            const orderItem = [...orderItems, newOrder];
-            const finalizeOrder = JSON.stringify(orderItem);
-            this.localStorage.store('order', finalizeOrder);
-        } else {
-            const newOrder = [{
-                id: order.id,
-                quantity: order.quantity,
-                name: order.name,
-                description: order.description,
-                image: order.image,
-                price: order.price
-            }];
-            this.localStorage.store('order', JSON.stringify(newOrder));
-        }
-        this.orderStateFacade.addOrder(order);
-        this.newOrderToast(order);
-        this.runningTotalToast();
-    }
-
-    public subtractOrderItem(order: ProductDto): void {
-        this.orderStateFacade.removeOrderItem(order);
-    }
-
-    async newOrderToast(order: ProductDto) {
-        const toast = await this.toastController.create({
-            header: 'Menu item added to order',
-            message: `${order.quantity} x ${order.name} @ ${order.price}`,
-            position: 'top',
-            duration: 3500,
-            buttons: [
-                {
-                    text: 'Okay',
-                    role: 'cancel',
-                    handler: () => {
-                        console.log('Cancel clicked');
-                    }
-                }
-            ]
-        });
-        await toast.present();
-    }
-
-    async runningTotalToast() {
-        const toast = await this.toastController.create({
-            header: 'Current Menu:',
-            message: `current order total: $ ${this.orderTotal.toFixed(2)}`,
-            position: 'bottom',
-            cssClass: 'runningTotal',
-            buttons: [
-                {
-                    text: 'Check Out',
-                    role: 'cancel',
-                    handler: () => {
-                        toast.dismiss().then(() => {
-                            this.router.navigate(['../../order'], {relativeTo: this.route});
-                        });
-                    }
-                }
-            ]
-        });
-        console.log(toast);
-        await toast.present();
-    }
-
-
-    public selectItem(selectedOrder: ProductDto) {
-        this.selectedItem = selectedOrder.id;
-    }
-
-    showChildren($event: ProductDto[]): void {
-        this.menuItems = $event;
-    }
+    // public addItem(order: ProductDto): void {
+    //     const existingOrder = this.localStorage.retrieve('order');
+    //     if (existingOrder !== null) {
+    //         const orderItems = JSON.parse(existingOrder);
+    //         const newOrder = {
+    //             id: order.id,
+    //             quantity: order.quantity,
+    //             name: order.name,
+    //             description: order.description,
+    //             image: order.image,
+    //             price: order.price
+    //         };
+    //         const orderItem = [...orderItems, newOrder];
+    //         const finalizeOrder = JSON.stringify(orderItem);
+    //         this.localStorage.store('order', finalizeOrder);
+    //     } else {
+    //         const newOrder = [{
+    //             id: order.id,
+    //             quantity: order.quantity,
+    //             name: order.name,
+    //             description: order.description,
+    //             image: order.image,
+    //             price: order.price
+    //         }];
+    //         this.localStorage.store('order', JSON.stringify(newOrder));
+    //     }
+    //     this.orderStateFacade.addOrder(order);
+    //     this.newOrderToast(order);
+    //     this.runningTotalToast();
+    // }
+    //
+    // public subtractOrderItem(order: ProductDto): void {
+    //     this.orderStateFacade.removeOrderItem(order);
+    // }
+    //
+    // async newOrderToast(order: ProductDto) {
+    //     const toast = await this.toastController.create({
+    //         header: 'Menu item added to order',
+    //         message: `${order.quantity} x ${order.name} @ ${order.price}`,
+    //         position: 'top',
+    //         duration: 3500,
+    //         buttons: [
+    //             {
+    //                 text: 'Okay',
+    //                 role: 'cancel',
+    //                 handler: () => {
+    //                     console.log('Cancel clicked');
+    //                 }
+    //             }
+    //         ]
+    //     });
+    //     await toast.present();
+    // }
+    //
+    // async runningTotalToast() {
+    //     const toast = await this.toastController.create({
+    //         header: 'Current Menu:',
+    //         message: `current order total: $ ${this.orderTotal.toFixed(2)}`,
+    //         position: 'bottom',
+    //         cssClass: 'runningTotal',
+    //         buttons: [
+    //             {
+    //                 text: 'Check Out',
+    //                 role: 'cancel',
+    //                 handler: () => {
+    //                     toast.dismiss().then(() => {
+    //                         this.router.navigate(['../../order'], {relativeTo: this.route});
+    //                     });
+    //                 }
+    //             }
+    //         ]
+    //     });
+    //     console.log(toast);
+    //     await toast.present();
+    // }
+    //
+    //
+    // public selectItem(selectedOrder: ProductDto) {
+    //     this.selectedItem = selectedOrder.id;
+    // }
+    //
+    // showChildren($event: ProductDto[]): void {
+    //     this.menuItems = $event;
+    // }
 
     public selectMenuGroup(menuGroup: number): void {
         this.orderStateFacade.loadMenuItems(menuGroup);

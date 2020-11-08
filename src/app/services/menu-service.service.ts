@@ -18,7 +18,7 @@ export class MenuServiceService {
     }
 
     public getMenuItems(groupId: number): Observable<ProductDto[]> {
-        const url = `api/itemed-food/${groupId}`;
+        const url = `api/get-first-child-item/${groupId}`;
         return this.http.get<ProductDto[]>(url);
     }
 
@@ -27,8 +27,8 @@ export class MenuServiceService {
         return this.http.get<ProductDto[]>(url);
     }
 
-    public getMenuGroups(): Observable<GroupingDto[]> {
-        const url = 'api/groups-food';
+    public getMenuGroups(groupName: string): Observable<GroupingDto[]> {
+        const url = `api/${groupName}`;
         return this.http.get<GroupingDto[]>(url);
     }
 }

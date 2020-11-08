@@ -36,14 +36,12 @@ export class OrderEffects {
     ));
     public loadMenuGroupList$ = createEffect(() => this.actions.pipe(
         ofType(OrderActions.loadMenuGroups),
-        switchMap((action) => of(action).pipe(
-            mergeMap(() => this.loadMenuGroups().pipe(
+        switchMap((action) =>  this.loadMenuGroups(action.groupName).pipe(
                 map((activity) => ({type: OrderActionsEnum.LOAD_MENU_GROUPS_SUCCESS, menuGroupItems: activity})),
                 catchError((errorParam) => {
                     return EMPTY;
                 })
             ))
-        ))
     ));
     public deselectItems$ = createEffect(() => this.actions.pipe(
         ofType(OrderActions.clearMenuGroups),
@@ -112,8 +110,8 @@ export class OrderEffects {
         return menuItems;
     }
 
-    private loadMenuGroups(): Observable<GroupingDto[]> {
-        const menuGroups = this.menuService.getMenuGroups();
+    private loadMenuGroups(groupName): Observable<GroupingDto[]> {
+        const menuGroups = this.menuService.getMenuGroups(groupName);
         menuGroups.subscribe(val => console.log(val));
         return menuGroups;
     }
