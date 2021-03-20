@@ -30,6 +30,7 @@ export class ItemListComponent implements OnInit, OnDestroy {
         loop: true
     };
     public isLoading = true;
+    public foodMenu: boolean
     constructor(private modalController: ModalController,
                 private activateRoute: ActivatedRoute,
                 private foodMenuStateFacade: FoodMenuStateFacade,
@@ -42,6 +43,7 @@ export class ItemListComponent implements OnInit, OnDestroy {
 
     public ngOnInit() {
             if (this.activateRoute.parent.snapshot.url[0]['path'] === 'food') {
+                this.foodMenu = true;
                 const foodGroups = this.foodMenuStateFacade.foodMenuGroupItems.subscribe((menuGroups) => {
                     this.menuGroups = menuGroups;
                     this.isLoading = false;
@@ -79,6 +81,7 @@ export class ItemListComponent implements OnInit, OnDestroy {
         if (this.groupTitle === 'food'){
            this.foodMenuStateFacade.getFoodMenuItems(groupId);
         } else {
+            this.drinkMenuStateFacade.getDrinkMenuItems(groupId);
         }
     }
 }

@@ -5,7 +5,7 @@
       <ion-label>Food</ion-label>
     </ion-item-divider>
 
-    <div style="padding-left: 6px; padding-right: 6px; ">
+    <div style="padding-left: 6px; padding-right: 6px; padding-bottom: 10px;">
       <ng-container *ngFor="let order of menuService.getOrders() | async">
         <ion-item lines="none" class="order-list-item">
           <ion-thumbnail slot="start">

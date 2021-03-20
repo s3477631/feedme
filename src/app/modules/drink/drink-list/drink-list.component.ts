@@ -1,10 +1,12 @@
-import {ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {MenuExplorerService} from '../../../services/menu-explorer.service';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {SwiperOptions} from 'swiper';
 import {FoodDetailComponent} from '../../food/food-detail/food-detail.component';
 import {ModalController} from '@ionic/angular';
-import {tap} from 'rxjs/operators';
-import {OrderStateFacade} from '../../../facade/order-state.facade';
+
+import {DrinkMenuStateFacade} from '../../../facade/drink-menu-state.facade';
+import {Subscription} from 'rxjs';
+import {SwiperComponent} from 'ngx-useful-swiper';
+import {DrinkDetailComponent} from '../drink-detail/drink-detail.component';
 
 @Component({
   selector: 'app-drink-list',
@@ -13,12 +15,14 @@ import {OrderStateFacade} from '../../../facade/order-state.facade';
 })
 
 export class DrinkListComponent implements OnInit {
+  @ViewChild('usefulSwiper') usefulSwiper: SwiperComponent;
   @Input()
   menuItems;
   @Input()
   groupTitle: string;
   @Input()
   menuGroups;
+  private subscriptions: Subscription = new Subscription();
   @Output()
   public getGroupId: EventEmitter<any> = new EventEmitter<any>();
   config: SwiperOptions = {
@@ -28,34 +32,31 @@ export class DrinkListComponent implements OnInit {
     loop: true
   };
   constructor(
-
+      private drinkMenuStateFacade: DrinkMenuStateFacade,
       private modalController: ModalController) { }
 
   ngOnInit() {
-    // this.orderStateFacade.initializeListeners();
-    // this.orderStateFacade.menuGroupItems.pipe(tap(menuGroups => {
-    //   console.log(this.menuGroups);
-    //   this.menuGroups = menuGroups;
-    //   this.cd.detectChanges();
-    // })).subscribe();
-    // this.orderStateFacade.menuItems.pipe(tap(menuItems =>{
-    //   this.menuItems = menuItems;
-    //   this.cd.detectChanges();
-    // })).subscribe();
-    // this.orderStateFacade.groupTitle.pipe(tap(groupTitle => {
-    //   this.groupTitle = groupTitle;
-    // })).subscribe();
+    const drinkItems = this.drinkMenuStateFacade.drinkMenuItems.subscribe((menuItems) => {
+      this.menuItems = menuItems;
+    });
+    this.subscriptions.add(drinkItems);
+    this.selectItem(1004);
   }
 
   async presentModal() {
     const modal = await this.modalController.create({
-      component: FoodDetailComponent,
+      component: DrinkDetailComponent,
       cssClass: 'food-detail-style'
     });
     return await modal.present();
   }
-
-  selectMenuGroup(groupId) {
-    this.getGroupId.emit(groupId);
+  public selectItem(initialItem?: number): void {
+    if (initialItem) {
+      this.drinkMenuStateFacade.selectDrinkItem(initialItem);
+    } else {
+      const selectedItemId = parseInt(this.usefulSwiper.swiper.clickedSlide.id, 0);
+      this.drinkMenuStateFacade.selectDrinkItem(selectedItemId);
+    }
   }
+
 }

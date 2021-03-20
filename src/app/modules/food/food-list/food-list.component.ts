@@ -1,12 +1,7 @@
-import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {MenuExplorerService} from '../../../services/menu-explorer.service';
-import {OrderStateFacade} from '../../../facade/order-state.facade';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ProductDto} from '../../../model/product.dto';
-import {LocalStorageService} from 'ngx-webstorage';
-import {ModalController, ToastController} from '@ionic/angular';
-import {tap} from 'rxjs/operators';
-import {ActivatedRoute, Router} from '@angular/router';
-import {GroupingDto} from '../../../model/grouping.dto';
+import {ModalController} from '@ionic/angular';
+import {Router} from '@angular/router';
 import {SwiperOptions} from 'swiper';
 import {FoodDetailComponent} from '../food-detail/food-detail.component';
 import {FoodMenuStateFacade} from '../../../facade/food-menu-state.facade';
@@ -20,11 +15,7 @@ import {SwiperComponent} from 'ngx-useful-swiper';
     styleUrls: ['./food-list.component.scss'],
 })
 export class FoodListComponent implements OnInit, OnDestroy {
-
-    public selectedItem: string;
-    public orderTotal: number;
     public menuItems: ProductDto[];
-    public menuGroups: GroupingDto[];
     public subscriptions: Subscription = new Subscription();
     config: SwiperOptions = {
         pagination: {el: '.swiper-pagination', clickable: true},
@@ -34,14 +25,9 @@ export class FoodListComponent implements OnInit, OnDestroy {
     };
     @ViewChild('usefulSwiper') usefulSwiper: SwiperComponent;
 
-    constructor(private menuExplorerService: MenuExplorerService,
-                private localStorage: LocalStorageService,
-                private toastController: ToastController,
-                public route: ActivatedRoute,
-                public router: Router,
+    constructor(public router: Router,
                 public modalController: ModalController,
-                public foodMenuStateFacade: FoodMenuStateFacade,
-                private orderStateFacade: OrderStateFacade) {
+                public foodMenuStateFacade: FoodMenuStateFacade) {
     }
 
     public ngOnInit() {
@@ -65,7 +51,7 @@ export class FoodListComponent implements OnInit, OnDestroy {
         this.subscriptions.unsubscribe();
     }
 
-    public selectItem(initialItem: number): void {
+    public selectItem(initialItem?: number): void {
         if (initialItem) {
             this.foodMenuStateFacade.selectFoodItem(initialItem);
         } else {

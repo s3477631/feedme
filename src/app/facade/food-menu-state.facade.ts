@@ -20,7 +20,7 @@ import * as foodMenuSelector from '../store/selectors/food-menu.selector';
 export class FoodMenuStateFacade {
     public foodMenuItems: Observable<ProductDto[]>;
     public foodMenuGroupItems: Observable<GroupingDto[]>;
-    public selectedFoodItem;
+    public selectedFoodItem: Observable<ProductDto>;
 
     constructor(private store: Store<FoodMenuState>) {
     }

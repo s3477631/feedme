@@ -5,13 +5,14 @@ import {ModalController} from '@ionic/angular';
 import {MenuServiceService} from '../../../services/menu-service.service';
 import {FoodMenuStateFacade} from '../../../facade/food-menu-state.facade';
 import {Subscription} from 'rxjs';
+import {DrinkMenuStateFacade} from '../../../facade/drink-menu-state.facade';
 
 @Component({
     selector: 'app-food-detail',
-    templateUrl: './food-detail.component.html',
-    styleUrls: ['./food-detail.component.scss'],
+    templateUrl: './drink-detail.component.html',
+    styleUrls: ['./drink-detail.component.scss'],
 })
-export class FoodDetailComponent implements OnDestroy {
+export class DrinkDetailComponent implements OnDestroy {
     menuItems: ProductDto[];
     orderItems = {OrderQuantity: 1, OrderSize: 'medium'};
     config: SwiperOptions = {
@@ -22,7 +23,7 @@ export class FoodDetailComponent implements OnDestroy {
     private subscriptions: Subscription = new Subscription();
 
     constructor(
-        public foodMenuStateFacade: FoodMenuStateFacade,
+        public drinkMenuStateFacade: DrinkMenuStateFacade,
         private menuService: MenuServiceService,
         private modalController: ModalController) {
     }
@@ -32,13 +33,13 @@ export class FoodDetailComponent implements OnDestroy {
     }
 
     addToOrders() {
-        const selectedFood = this.foodMenuStateFacade.selectedFoodItem.subscribe(foodItem => {
-            const foodSelected = Object.assign(this.orderItems, foodItem);
-            this.menuService.submitOrder(foodSelected);
+        const selectedDrink = this.drinkMenuStateFacade.selectedDrinkItem.subscribe(drinkItem => {
+            const drinkSelected = Object.assign(this.orderItems, drinkItem);
+            this.menuService.submitOrder(drinkSelected);
             this.modalController.dismiss();
         });
 
-        this.subscriptions.add(selectedFood);
+        this.subscriptions.add(selectedDrink);
     }
 
     formItems($event: any) {

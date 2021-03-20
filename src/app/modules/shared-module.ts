@@ -15,6 +15,7 @@ import {FoodDetailComponent} from './food/food-detail/food-detail.component';
 import {DrinkPage} from './drink/drink.page';
 import {DrinkListComponent} from './drink/drink-list/drink-list.component';
 import {RouterModule} from '@angular/router';
+import {DrinkDetailComponent} from './drink/drink-detail/drink-detail.component';
 
 
 
@@ -37,6 +38,7 @@ import {RouterModule} from '@angular/router';
         FoodPage,
         FoodListComponent,
         FoodDetailComponent,
+        DrinkDetailComponent,
         DrinkPage,
         DrinkListComponent
     ],

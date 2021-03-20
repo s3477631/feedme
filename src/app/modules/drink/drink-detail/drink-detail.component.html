@@ -1,0 +1,42 @@
+<ion-content>
+    <div class="card-container">
+        <div (click)="closeMenuItem()" class="close-button">
+            <ion-icon class="close-button-icon" name="close-outline"></ion-icon>
+        </div>
+
+        <div class="card-header">
+            <div class="card-title">
+                {{(drinkMenuStateFacade?.selectedDrinkItem | async)?.name}}
+            </div>
+        </div>
+        <div class="card-content-container">
+            <div class="card-options-panel">
+                <!--                replace with a dynamic form generator-->
+                <div class="options-title">Options:</div>
+
+                <div class="options-container">
+                    <app-order-form (formItems)="formItems($event)"></app-order-form>
+                </div>
+            </div>
+            <div class="card-description-panel">
+                <!--                <div class="card-image-container">-->
+                <img class="card-image"
+                     [src]="(drinkMenuStateFacade?.selectedDrinkItem | async)?.image"/>
+                <!--                </div>-->
+                <div class="card-description">
+
+                    <div class="card-body">
+                        {{(drinkMenuStateFacade?.selectedDrinkItem | async)?.description}}
+                    </div>
+                </div>
+                <div class="add-to-order-button" (click)="addToOrders()">
+                    Add to Orders
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</ion-content>
+
+

@@ -1,7 +1,7 @@
 <div class="vertical-flex-spacer"></div>
   <div class="swiper-container-wrapped">
     <div class="vertical-flex-spacer"></div>
-    <div class="card-container" *ngIf="menuItems">
+    <div class="card-container" *ngIf="foodMenu">
       <div class="card-description">
         <div class="card-header">
           <div class="card-title">
@@ -18,6 +18,26 @@
       <div class="card-image-container">
         <img class="card-image"
              src="https://images.pexels.com/photos/1260968/pexels-photo-1260968.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"/>
+      </div>
+    </div>
+
+    <div class="card-container" *ngIf="!foodMenu">
+      <div class="card-description">
+        <div class="card-header">
+          <div class="card-title">
+            Bartenders Choice
+          </div>
+        </div>
+        <div class="card-body">
+          Grab a cold one on us, it'll be delicious, nutritious and all the rest of it.
+          Thank us for this hang over free beverage.
+        </div>
+      </div>
+
+
+      <div class="card-image-container">
+        <img class="card-image"
+             src="https://images.pexels.com/photos/3821696/pexels-photo-3821696.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"/>
       </div>
     </div>
 

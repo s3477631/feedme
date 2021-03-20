@@ -1,0 +1,162 @@
+
+swiper {
+  //display: flex;
+  //align-content: flex-end;
+}
+
+//
+//.swiper-slide {
+//  border-radius: 15px;
+//}
+.price-label-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.group-label-container {
+  position: relative;
+  top: -20px;
+
+  text-align: center;
+  width: 100%;
+}
+
+.vertical-flex-spacer{
+  flex: 1;
+  display: flex;
+}
+
+.group-label {
+  background: rgba(0, 166, 237, 0.85);
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+//.price-text{
+//  position: absolute;
+//  transform: rotate(45deg);
+//  color: white;
+//  width: 100%;
+//  font-size: 22px;
+//}
+.swiper-container-wrapped {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.swiper-container {
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.middle-bar {
+  padding-top: 10px;
+  padding-left: 20px;
+  font-size: 20px;
+  padding-bottom: 10px;
+  color: white;
+  background: #00A6ED;
+  border-bottom-right-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+
+.swiper-pagination-bullets {
+  //top: 90%;
+}
+
+.card-container {
+  display: flex;
+  background: white;
+  margin-left: 12px;
+  margin-right: 12px;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-left: 5px;
+  border-top-right-radius: 45px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 5px;
+}
+
+.card-image-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.card-description {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card-title {
+  color: black;
+  font-weight: 500;
+  font-size: 22px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.card-body {
+  padding-left: 8px;
+  padding-right: 8px;
+  color: black;
+}
+
+.price-label {
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  left: 60px;
+  top: 10px;
+  position: absolute;
+  transform: rotate(45deg);
+  background: rgba(228, 46, 46, 0.85);
+}
+
+//TODO min-width may need to vary depending on screen size - set min width to 100px for motog4 and smaller iphone screen sizes.
+.card-image {
+  border-top-right-radius: 45px;
+  border-bottom-left-radius: 15px;
+  max-width: 40vw;
+}
+.price-container{
+  position: absolute;
+  right: 5px;
+  border-radius: 10px;
+  padding: 15px;
+  background: #0EC615;
+}
+
+.add-to-order-button-container{
+  border-radius: 10px;
+  padding: 15px;
+  background: #e5341b;
+  position: relative;
+  text-align: center;
+  top: 15px;
+  right: -15px;
+}
+
+.group-label {
+  background: rgba(0, 166, 237, 0.85);
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.group-label-container {
+  position: relative;
+  top: -20px;
+
+  text-align: center;
+  width: 100%;
+}

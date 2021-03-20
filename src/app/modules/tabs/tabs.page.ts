@@ -1,6 +1,8 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {OrderStateFacade} from '../../facade/order-state.facade';
 import {ActivatedRoute, Router} from '@angular/router';
+import {UtilStateFacade} from '../../facade/util-state.facade';
+import {MenuServiceService} from '../../services/menu-service.service';
 
 @Component({
     selector: 'app-tabs',
@@ -12,6 +14,8 @@ export class TabsPage implements OnInit {
 
     constructor(public orderStateFacade: OrderStateFacade,
                 public cd: ChangeDetectorRef,
+                private utilStateFacade: UtilStateFacade,
+                public menuService: MenuServiceService,
                 public route: ActivatedRoute, public router: Router) {
     }
 
@@ -44,5 +48,9 @@ export class TabsPage implements OnInit {
 
 
     clearMenuGroup() {
+    }
+
+    resetBack() {
+        this.utilStateFacade.backButton(false)
     }
 }

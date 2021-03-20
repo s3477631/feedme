@@ -31,6 +31,12 @@ export class DemoMenuService {
             }
         },
         {
+            regex: /api\/number-of-orders/,
+            response: (args, body) => {
+                return this.totalNumberItems();
+            }
+        },
+        {
             regex: /api\/food/,
             response: (args, body) => {
                 return this.getFood();
@@ -133,7 +139,7 @@ export class DemoMenuService {
 
     private getDrink(): ProductDto[] {
         const drink = [{
-            id: '1',
+            id: '1001',
             name: 'Coca-cola',
             price: '6.00',
             quantity: 1,
@@ -141,7 +147,7 @@ export class DemoMenuService {
             description: '250ml Refreshing Beverage',
             image: 'https://shortysliquor.com.au/media/catalog/product/cache/2fcc3329aef4183c8e06230d7e06f8f3/5/6/569-2.png',
         }, {
-            id: '2',
+            id: '1002',
             name: 'Fanta',
             price: '5.00',
             quantity: 1,
@@ -149,7 +155,7 @@ export class DemoMenuService {
             description: '250ml Refreshing Beverage',
             image: 'https://shortysliquor.com.au/media/catalog/product/cache/2fcc3329aef4183c8e06230d7e06f8f3/f/a/fanta_250ml_climline.png',
         }, {
-            id: '3',
+            id: '1003',
             name: 'Orange Juice',
             price: '5.50',
             quantity: 1,
@@ -158,17 +164,17 @@ export class DemoMenuService {
             image: 'https://shortysliquor.com.au/media/catalog/product/cache/2fcc3329aef4183c8e06230d7e06f8f3/3/0/300_1.png',
         },
             {
-                id: '1',
+                id: '1004',
                 name: 'Carlsberg',
-                price: '6.00-$14.00',
+                price: '14.00',
                 quantity: 1,
                 groupId: 101,
                 description: 'pots, schooners or pints of Carlsberg',
                 image: 'https://ecampusontario.pressbooks.pub/app/uploads/sites/520/2019/12/2129H_0-300x296.jpg',
             }, {
-                id: '2',
+                id: '1005',
                 name: '4x Gold',
-                price: '4.00-$9.00',
+                price: '9.00',
                 quantity: 1,
                 groupId: 101,
                 description: 'pots, schooners or pints of 4x Gold',
@@ -247,22 +253,38 @@ export class DemoMenuService {
     private getOrder() {
         return this.orders;
     }
-    private orderTotal(){
-       return this.orders.reduce((acc, cur) => {
-                return acc + (parseFloat(cur.price) * parseFloat(cur.OrderQuantity));
-            }, 0.00);
+
+    private orderTotal() {
+        return this.orders.reduce((acc, cur) => {
+            return acc + (parseFloat(cur.price) * parseFloat(cur.OrderQuantity));
+        }, 0.00);
+    }
+
+    private totalNumberItems() {
+        return this.orders.reduce((acc, cur) => {
+            return acc + parseInt(cur.OrderQuantity, 0);
+        }, 0);
     }
 
     private getMenuItems(groupId): ProductDto[] {
         if (groupId.length === 1) {
             const food = this.getFood().filter(group => group.groupId === parseInt(groupId, 0));
             return food;
+        } else {
+            const drink = this.getDrink().filter(group => group.groupId === parseInt(groupId, 0));
+            return drink;
         }
     }
 
     private getItems(itemId): ProductDto {
-        const test = this.getFood().filter(item => parseInt(item.id, 0) === parseInt(itemId, 0));
-        return test[0];
+        if (itemId.length === 1) {
+            const food = this.getFood().filter(item => parseInt(item.id, 0) === parseInt(itemId, 0));
+            return food[0];
+        } else {
+            const drink = this.getDrink().filter(item => parseInt(item.id, 0) === parseInt(itemId, 0));
+            return drink[0];
+        }
+
     }
 
 
