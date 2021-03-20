@@ -9,4 +9,6 @@ export interface ProductDto {
     image?: any;
     groupId?: number;
     parent?: boolean;
+    OrderQuantity?: number;
+    OrderSize?: string;
 }

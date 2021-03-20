@@ -1,21 +1,22 @@
-<ion-tabs >
+<ion-tabs  >
 
   <ion-tab-bar class="tab-bar-bottom" slot="bottom" >
-    <ion-tab-button [ngClass]="selectedOption('food')" (click)="navigateMe('food')">
+    <ion-tab-button tab="food">
         <ion-icon name="restaurant" style="height: 50px; width: 50px;"></ion-icon>
         <ion-label style="padding-bottom: 3px;">Food</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button  [ngClass]="selectedOption('drink')"  (click)="navigateMe('drink')">
+    <ion-tab-button tab="drink">
       <ion-icon name="beer-outline" style="height: 50px; width: 50px;"></ion-icon>
       <ion-label style="padding-bottom: 3px;">Drink</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button  [ngClass]="selectedOption('order')" (click)="navigateMe('food')">
+    <ion-tab-button tab="order" >
       <ion-icon name="wallet-outline" style="height: 50px; width: 50px;"></ion-icon>
       <ion-badge color="danger" style="font-size: 12px;">{{ (orderStateFacade.orderQuantity | async) }}</ion-badge>
       <ion-label style="padding-bottom: 3px;">Order</ion-label>
     </ion-tab-button>
+
   </ion-tab-bar>
 
 </ion-tabs>

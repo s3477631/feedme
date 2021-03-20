@@ -8,7 +8,7 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'order',
+    path: '',
     loadChildren: () => import('./modules/tabs/tabs.module').then(m => m.TabsPageModule)
   }
 ];

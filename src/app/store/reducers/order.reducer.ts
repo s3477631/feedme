@@ -2,7 +2,7 @@ import {createReducer, on, Action} from '@ngrx/store';
 
 import {initialOrderState, OrderState} from '../state/order.state';
 import * as OrderActions from '../actions/order.actions';
-import {act} from '@ngrx/effects';
+
 
 const orderStateReducer = createReducer(initialOrderState,
     on(OrderActions.addOrderItemSuccess, (state: OrderState, action) => {
@@ -28,31 +28,7 @@ const orderStateReducer = createReducer(initialOrderState,
             ...state,
             totalOrderCost: action.totalOrderCost
         };
-    }),
-    on(OrderActions.loadMenuItemSuccess, (state: OrderState, action) => {
-        return {
-            ...state,
-            menuItems: action.menuList
-        };
-    }),
-    on(OrderActions.loadMenuGroupSuccess, (state: OrderState, action) => {
-        return {
-            ...state,
-            menuGroupItems: action.menuGroupItems
-        };
-    }),
-    on(OrderActions.clearMenuGroupSuccess, ((state, action) => {
-        return {
-            ...state,
-            menuGroupItems: undefined
-        };
-    })),
-    on(OrderActions.loadMenuGroupTitle, ((state, action) => {
-        return {
-            ...state,
-            groupName: action.groupName
-        };
-    })),
+    })
 );
 
 

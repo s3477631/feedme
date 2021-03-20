@@ -13,6 +13,9 @@ export class MenuExplorerService {
   private _food: BehaviorSubject<ProductDto[]> = new BehaviorSubject<ProductDto[]>([]);
   public $food: Observable<ProductDto[]> = this._food.asObservable();
 
+  private _orders: BehaviorSubject<any> = new BehaviorSubject<any>([]);
+  public $orders: Observable<any> = this._orders.asObservable();
+
   constructor(public menuService: MenuServiceService) { }
   public getDrinkMenu(): void{
     this.menuService.getDrinkMenu().subscribe((data) => {

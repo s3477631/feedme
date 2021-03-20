@@ -1,0 +1,65 @@
+.order-list-item{
+  --background: #f0eff4;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.order-item-text{
+  margin-top: 0px !important;
+  margin-bottom: 25px !important;
+  font-family: Roboto;
+  font-weight: 400;
+  font-size: 18px;
+  color: black;
+}
+.order-list-divider{
+  border-bottom: 1px solid #bbb4b4;
+  margin-right: 12px;
+  margin-right: 12px;
+}
+.order-qty{
+  padding: 10px;
+  margin-right: 5px;
+  margin-left: 5px;
+  border-radius: 2px;
+  background: #F6F3FF;
+  color: black;
+  font-weight: 700;
+  font-family: "Roboto Thin";
+  box-shadow: inset -4px -4px 18px -8px rgba(192, 62, 62, 0.29);
+}
+.order-group-item{
+  background: #3171e0;
+  border: none;
+  color: white;
+}
+.increase-button{
+  --background: #0FF30A;
+}
+.decrease-button{
+  --background: #FF5151;
+}
+.increase-icon{
+  font-size: 28px;
+}
+.decrease-icon{
+  font-size: 28px;
+}
+ion-thumbnail{
+  margin-right: 15px !important;
+}
+
+ion-item{
+  --padding-start: 10px;
+}
+
+.item-total{
+  padding-right: 16px;
+  color: black;
+  width: 100%;
+  justify-content: flex-end;
+  display: flex;
+}
+ion-thumbnail{
+  height: 80px;
+  width: 80px;
+}

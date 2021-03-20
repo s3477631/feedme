@@ -1,0 +1,35 @@
+<ion-list  style="margin-top: 20px; padding-bottom: 200px; background: #f0eff4;">
+  <ion-item-group>
+
+    <ion-item-divider class="order-group-item">
+      <ion-label>Food</ion-label>
+    </ion-item-divider>
+
+    <div style="padding-left: 6px; padding-right: 6px; ">
+      <ng-container *ngFor="let order of menuService.getOrders() | async">
+        <ion-item lines="none" class="order-list-item">
+          <ion-thumbnail slot="start">
+            <img [src]="order?.image">
+          </ion-thumbnail>
+          <ion-label text-wrap class="order-item-text">{{order?.name}} {{order?.OrderSize}}</ion-label>
+
+          <ion-button size="default"  class="decrease-button">
+            <ion-text class="decrease-icon">-</ion-text>
+          </ion-button>
+          <div class="order-qty">
+            {{order?.OrderQuantity}}
+          </div>
+          <ion-button size="default" class="increase-button">
+            <ion-text class="increase-icon">+</ion-text>
+          </ion-button>
+        </ion-item>
+        <div class="item-total">
+          <h4>sub-total: ${{(order?.OrderQuantity * order?.price).toFixed(2)}}</h4>
+        </div>
+        <div class="order-list-divider"></div>
+      </ng-container>
+
+    </div>
+  </ion-item-group>
+
+</ion-list>

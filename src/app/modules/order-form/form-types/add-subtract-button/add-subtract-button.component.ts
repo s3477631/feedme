@@ -17,13 +17,15 @@ export class AddSubtractButtonComponent implements OnInit {
     }
 
     ngOnInit() {
+        console.log(this.orderItem.value)
+        this.parentForm.valueChanges.subscribe(value => console.log(value));
     }
 
     public decreaseItem(formItem): void {
-        this.parentForm.controls[formItem].patchValue(this.orderItem.value--);
+        this.parentForm.controls[formItem].patchValue(this.orderItem.value -= 1);
     }
 
     public increaseItem(formItem): void {
-        this.parentForm.controls[formItem].patchValue(this.orderItem.value++);
+        this.parentForm.controls[formItem].patchValue(this.orderItem.value += 1);
     }
 }

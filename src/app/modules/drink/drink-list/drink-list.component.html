@@ -1,21 +1,3 @@
-<!--<ion-list *ngIf="!menuGroups" style="background: #F0EFF4; height: 100%;">-->
-<!--    <ng-container >-->
-<!--        <app-food-detail [menuItems]="menuItems"></app-food-detail>-->
-<!--            <app-product (addProduct)="addItem($event)"-->
-<!--                         (filterChild)="showChildren($event)"-->
-<!--                         (subtractItem)="subtractOrderItem($event)"-->
-<!--                         (selectProduct)="selectItem($event)"-->
-<!--                         *ngFor="let food of menuItems; let i = index;"-->
-<!--                         [id]="i"-->
-<!--                         [selected]="selectedItem"-->
-<!--                         [product]="food">-->
-<!--            </app-product>-->
-
-
-<!--    </ng-container>-->
-
-<!--</ion-list>-->
-
 <ng-container style="background: #F0EFF4; height: 100%;">
     <div class="vertical-flex-spacer"></div>
     <div class="swiper-container-wrapped">
@@ -48,11 +30,6 @@
             </div>
         </div>
         <div class="vertical-flex-spacer" *ngIf="menuItems"></div>
-
-
-        <!--            <div class="middle-bar">-->
-        <!--                Devin's Menus-->
-        <!--            </div>-->
         <ng-container *ngIf="menuGroups">
             <swiper [config]="config" class="swiper-container">
 
@@ -65,10 +42,6 @@
                         </div>
 
                     </div>
-
-
-                    <!--                <div class="swiper-slide" ><ion-img ></ion-img></div>-->
-                    <!--                <div class="swiper-slide" *ngFor="let menuGroup of menuGroups"><ion-img [src]="menuGroup[1]?.image"></ion-img></div>-->
                 </div>
                 <!-- Add Pagination -->
                 <div class="swiper-pagination"></div>
@@ -79,15 +52,11 @@
                 <div class="swiper-wrapper">
                     <div class="swiper-slide" *ngFor="let menuItem of menuItems">
                         <div class="price-label-container">
-                            <div class="price-label">${{menuItem.price}}</div>
+                            <div class="price-label">${{menuItem?.price}}</div>
                         </div>
                         <img (click)="selectMenuGroup(menuItem.groupId)"
                              [src]="menuItem?.image"/>
                     </div>
-
-
-                    <!--                <div class="swiper-slide" ><ion-img ></ion-img></div>-->
-                    <!--                <div class="swiper-slide" *ngFor="let menuGroup of menuGroups"><ion-img [src]="menuGroup[1]?.image"></ion-img></div>-->
                 </div>
                 <!-- Add Pagination -->
                 <div class="swiper-pagination"></div>
@@ -97,11 +66,6 @@
         </ng-container>
 
     </div>
-
-
-    <!--            <app-group-items (click)="selectMenuGroup(menuGroup.groupId)" *ngFor="let menuGroup of menuGroups"-->
-    <!--                             [menuGroups]="menuGroup">-->
-    <!--            </app-group-items>-->
 </ng-container>
 
 

@@ -6,7 +6,7 @@
 
         <div class="card-header">
             <div class="card-title">
-                Food Item
+                {{(foodMenuStateFacade?.selectedFoodItem | async)?.name}}
             </div>
         </div>
         <div class="card-content-container">
@@ -15,24 +15,21 @@
                 <div class="options-title">Options:</div>
 
                 <div class="options-container">
-
-
-                    <app-order-form></app-order-form>
+                    <app-order-form (formItems)="formItems($event)"></app-order-form>
                 </div>
             </div>
             <div class="card-description-panel">
                 <!--                <div class="card-image-container">-->
                 <img class="card-image"
-                     src="https://images.pexels.com/photos/1260968/pexels-photo-1260968.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"/>
+                     [src]="(foodMenuStateFacade?.selectedFoodItem | async)?.image"/>
                 <!--                </div>-->
                 <div class="card-description">
 
                     <div class="card-body">
-                        A traditional Italian seasoned roasted pork shoulder, seared in the oven, served on
-                        a fresh, hand-made flat-bread then topped with pesto crème fraiche and arugula
+                        {{(foodMenuStateFacade?.selectedFoodItem | async)?.description}}
                     </div>
                 </div>
-                <div class="add-to-order-button">
+                <div class="add-to-order-button" (click)="addToOrders()">
                     Add to Orders
                 </div>
             </div>

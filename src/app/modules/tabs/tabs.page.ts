@@ -12,23 +12,27 @@ export class TabsPage implements OnInit {
 
     constructor(public orderStateFacade: OrderStateFacade,
                 public cd: ChangeDetectorRef,
-                public activatedRoute: ActivatedRoute, public router: Router) {
+                public route: ActivatedRoute, public router: Router) {
     }
 
     ngOnInit() {
         this.orderStateFacade.initializeListeners();
-        this.orderStateFacade.clearGroupOptions();
+
         // console.log(this.activatedRoute.snapshot._routerState['url'])
-        this.orderStateFacade.loadMenuGroups(`groups-food`);
+        // this.orderStateFacade.loadMenuGroups(`groups-food`);
     }
 
 //   this.orderStateFacade.clearGroupOptions();
-    navigateMe(page: string) {
-        this.orderStateFacade.initializeListeners();
-        this.orderStateFacade.clearGroupOptions();
-        this.selectedMenuItem = page;
-        this.orderStateFacade.loadMenuGroups(`groups-${page}`);
-    }
+//     navigateMe(page: string) {
+//         console.log(page);
+//         this.router.navigateByUrl(`tabs/${page}`, {relativeTo: this.route});
+//         if (page !== 'order') {
+//
+//         } else {
+//             console.log('navv')
+//             this.router.navigate(['order'], {relativeTo: this.route});
+//         }
+//     }
 
     selectedOption(selected: string): string {
         if (selected === this.selectedMenuItem) {
@@ -36,5 +40,9 @@ export class TabsPage implements OnInit {
         } else {
             return 'tabs-buttons';
         }
+    }
+
+
+    clearMenuGroup() {
     }
 }

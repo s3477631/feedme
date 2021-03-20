@@ -9,6 +9,12 @@ import {AddSubtractButtonComponent} from './order-form/form-types/add-subtract-b
 import {DropDownComponent} from './order-form/form-types/drop-down/drop-down.component';
 import {ItemListComponent} from './components/item-list/item-list.component';
 import {NgxUsefulSwiperModule} from 'ngx-useful-swiper';
+import {FoodPage} from './food/food.page';
+import {FoodListComponent} from './food/food-list/food-list.component';
+import {FoodDetailComponent} from './food/food-detail/food-detail.component';
+import {DrinkPage} from './drink/drink.page';
+import {DrinkListComponent} from './drink/drink-list/drink-list.component';
+import {RouterModule} from '@angular/router';
 
 
 
@@ -19,6 +25,7 @@ import {NgxUsefulSwiperModule} from 'ngx-useful-swiper';
         FormsModule,
         NgxUsefulSwiperModule,
         ReactiveFormsModule,
+        RouterModule,
     ],
     declarations: [
         ProductComponent,
@@ -26,7 +33,12 @@ import {NgxUsefulSwiperModule} from 'ngx-useful-swiper';
         OrderFormComponent,
         AddSubtractButtonComponent,
         DropDownComponent,
-        ItemListComponent
+        ItemListComponent,
+        FoodPage,
+        FoodListComponent,
+        FoodDetailComponent,
+        DrinkPage,
+        DrinkListComponent
     ],
     exports: [
         NgxUsefulSwiperModule,

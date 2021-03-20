@@ -5,7 +5,7 @@ import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {OrderPage} from './order.page';
 import {OrderPageRoutingModule} from './order-routing.module';
-import {OrderListComponent} from './order-list/order-list.component';
+import {OrderListComponent} from './components/order-list/order-list.component';
 import {SharedModule} from '../shared-module';
 
 @NgModule({

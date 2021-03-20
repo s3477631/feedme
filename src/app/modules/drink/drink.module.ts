@@ -17,6 +17,6 @@ import {DrinkListComponent} from './drink-list/drink-list.component';
     DrinkPageRoutingModule,
     SharedModule
   ],
-  declarations: [DrinkPage, DrinkListComponent]
+  declarations: []
 })
 export class DrinkPageModule {}

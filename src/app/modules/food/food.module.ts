@@ -17,6 +17,6 @@ import {FoodDetailComponent} from './food-detail/food-detail.component';
     SharedModule,
     FoodPageRoutingModule
   ],
-  declarations: [FoodPage, FoodListComponent, FoodDetailComponent]
+  declarations: []
 })
 export class FoodPageModule {}

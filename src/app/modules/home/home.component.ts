@@ -17,6 +17,6 @@ export class HomeComponent implements OnInit {
 
   goToApp() {
     this.localStorage.store('tenant', 'show');
-    this.router.navigate(['order/tabs/food'], {relativeTo: this.route});
+    this.router.navigate(['tabs/food'], {relativeTo: this.route});
   }
 }

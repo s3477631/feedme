@@ -85,6 +85,7 @@ swiper {
 
 .card-image-container {
   display: flex;
+  flex-direction: column;
   justify-content: flex-end;
 }
 
@@ -126,4 +127,36 @@ swiper {
   border-bottom-left-radius: 15px;
   max-width: 40vw;
 }
+.price-container{
+  position: absolute;
+  right: 5px;
+  border-radius: 10px;
+  padding: 15px;
+  background: #0EC615;
+}
 
+.add-to-order-button-container{
+  border-radius: 10px;
+  padding: 15px;
+  background: #e5341b;
+  position: relative;
+  text-align: center;
+  top: 15px;
+  right: -15px;
+}
+
+.group-label {
+  background: rgba(0, 166, 237, 0.85);
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.group-label-container {
+  position: relative;
+  top: -20px;
+
+  text-align: center;
+  width: 100%;
+}

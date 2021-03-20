@@ -1,9 +1,8 @@
 import {createAction, props} from '@ngrx/store';
 
 import {OrderActionsEnum} from '../enums/order.actions.enum';
-import {OrderDto} from '../../model/order.dto';
 import {ProductDto} from '../../model/product.dto';
-import {GroupingDto} from '../../model/grouping.dto';
+
 
 export const addOrderItem = createAction(OrderActionsEnum.ADD_ORDER_ITEM, props<{ addOrderItem: ProductDto }>());
 export const addOrderItemSuccess = createAction(OrderActionsEnum.ADD_ORDER_ITEM_SUCCESS,
@@ -28,28 +27,5 @@ export const totalOrderCost = createAction(OrderActionsEnum.TOTAL_ORDER_COST,
 
 export const totalOrderCostSuccess = createAction(OrderActionsEnum.TOTAL_ORDER_COST_SUCCESS,
     props<{ totalOrderCost: number }>()
-);
-
-export const loadMenuGroups = createAction(OrderActionsEnum.LOAD_MENU_GROUPS,
-    props<{ groupName: string }>()
-);
-
-export const loadMenuGroupSuccess = createAction(OrderActionsEnum.LOAD_MENU_GROUPS_SUCCESS,
-    props<{ menuGroupItems: GroupingDto[] }>()
-);
-
-export const loadMenuGroupTitle = createAction(OrderActionsEnum.LOAD_GROUP_NAME_SUCCESS,
-    props<{ groupName: string }>()
-);
-
-export const clearMenuGroups = createAction(OrderActionsEnum.CLEAR_MENU_GROUP);
-export const clearMenuGroupSuccess = createAction(OrderActionsEnum.CLEAR_MENU_GROUP_SUCCESS);
-
-export const loadMenuItems = createAction(OrderActionsEnum.LOAD_MENU,
-    props<{ groupId: number }>()
-);
-
-export const loadMenuItemSuccess = createAction(OrderActionsEnum.LOAD_MENU_SUCCESS,
-    props<{ menuList: ProductDto[] }>()
 );
 

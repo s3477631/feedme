@@ -8,6 +8,13 @@ swiper {
 //.swiper-slide {
 //  border-radius: 15px;
 //}
+
+.loading-icon{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
 .price-label-container {
   display: flex;
   justify-content: flex-end;
@@ -32,6 +39,14 @@ swiper {
   border-bottom-right-radius: 15px;
   padding-top: 5px;
   padding-bottom: 5px;
+}
+
+.group-label-container {
+  position: relative;
+  top: -20px;
+
+  text-align: center;
+  width: 100%;
 }
 
 //.price-text{

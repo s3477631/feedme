@@ -3,6 +3,12 @@ import {OrderStateFacade} from '../../facade/order-state.facade';
 import {AlertController} from '@ionic/angular';
 import {LocalStorage, LocalStorageService, SessionStorage} from 'ngx-webstorage';
 import {tap} from 'rxjs/operators';
+import {FoodMenuStateFacade} from '../../facade/food-menu-state.facade';
+import {DrinkMenuState} from '../../store/state/drink-menu.state';
+import {DrinkMenuStateFacade} from '../../facade/drink-menu-state.facade';
+import {MenuServiceService} from '../../services/menu-service.service';
+import {Router} from '@angular/router';
+import {UtilStateFacade} from '../../facade/util-state.facade';
 
 @Component({
     selector: 'app-tab-food',
@@ -14,26 +20,34 @@ export class FoodPage implements OnInit {
     public menuItems;
     public menuGroups;
     public groupTitle: string;
+    public first: string;
+    public last: string;
 
     constructor(public orderStateFacade: OrderStateFacade,
+                public foodMenuStateFacade: FoodMenuStateFacade,
                 public alertController: AlertController,
-                public cd: ChangeDetectorRef
-    ) {
-    }
+                public utilStateFacade: UtilStateFacade,
+                private route: Router,
+                public menuService: MenuServiceService) {}
 
     public ngOnInit(): void {
-        this.orderStateFacade.initializeListeners();
-        this.orderStateFacade.menuGroupItems.pipe(tap(menuGroups => {
-            this.menuGroups = menuGroups;
-            this.cd.detectChanges();
-        })).subscribe();
-        this.orderStateFacade.menuItems.pipe(tap(menuItems => {
-            this.menuItems = menuItems;
-            this.cd.detectChanges();
-        })).subscribe();
-        this.orderStateFacade.groupTitle.pipe(tap(groupTitle => {
-            this.groupTitle = groupTitle;
-        })).subscribe();
+        // this.orderStateFacade.initializeListeners();
+        this.foodMenuStateFacade.initializeListeners();
+        // this.drinkMenuStateFacade.getFoodGroups()
+        // this.foodMenuStateFacade.getFoodMenuItems(1);
+        this.foodMenuStateFacade.getFoodGroups();
+        // this.orderStateFacade.loadMenuGroups('groups-food');
+        // this.orderStateFacade.menuGroupItems.pipe(tap(menuGroups => {
+        //     this.menuGroups = menuGroups;
+        //     this.cd.detectChanges();
+        // })).subscribe();
+        // this.orderStateFacade.menuItems.pipe(tap(menuItems => {
+        //     this.menuItems = menuItems;
+        //     this.cd.detectChanges();
+        // })).subscribe();
+        // this.orderStateFacade.groupTitle.pipe(tap(groupTitle => {
+        //     this.groupTitle = groupTitle;
+        // })).subscribe();
 
     }
 
@@ -63,18 +77,25 @@ export class FoodPage implements OnInit {
     //     await alert.present();
     // }
 
-
-    public goBack(): void {
-        console.log(this.groupTitle);
-        if (this.groupTitle === 'Drinks') {
-            this.orderStateFacade.loadMenuGroups('groups-drink');
-        } else if (this.groupTitle === 'Food') {
-            this.orderStateFacade.loadMenuGroups('groups-food');
-        }
+    submit() {
+        const payload = {
+            first: this.first,
+            last: this.last
+        };
+        this.menuService.submitOrder(payload);
     }
 
-    getMenuItem(menuItems: any) {
-        console.log(menuItems);
-        this.orderStateFacade.loadMenuItems(menuItems);
+    public getMenu($event): void {
+        console.log($event);
+        this.foodMenuStateFacade.getFoodMenuItems($event);
+    }
+
+    test() {
+        // this.foodMenuStateFacade.getFoodMenuItems(1);
+    }
+
+    public routeBack(): void {
+        this.route.navigate(['tabs', 'food']);
+        this.utilStateFacade.backButton(false);
     }
 }

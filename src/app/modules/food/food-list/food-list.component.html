@@ -15,93 +15,54 @@
 <!--    </ng-container>-->
 
 <!--</ion-list>-->
+<!--<ng-container style="background: #F0EFF4; height: 100%;">-->
 
-<ng-container style="background: #F0EFF4; height: 100%;">
+<div class="vertical-flex-spacer"></div>
+<div class="swiper-container-wrapped">
     <div class="vertical-flex-spacer"></div>
-    <div class="swiper-container-wrapped">
-        <div class="vertical-flex-spacer"></div>
-        <ion-card *ngIf="!menuItems">
-            <!--            <div class="price-text">-->
-            <!--                $10.00-->
-            <!--            </div>-->
-            <img src="../../assets/dinner.jpeg"/>
-        </ion-card>
-        <div class="vertical-flex-spacer"></div>
+    <div class="vertical-flex-spacer"></div>
 
-        <div class="card-container" (click)="presentModal()" *ngIf="menuItems">
-            <div class="card-description">
-                <div class="card-header">
-                    <div class="card-title">
-                        Food Item
-                    </div>
-                </div>
-                <div class="card-body">
-                    A traditional Italian seasoned roasted pork shoulder, seared in the oven, served on
-                    a fresh, hand-made flat-bread then topped with pesto crème fraiche and arugula
+    <div class="card-container" (click)="presentModal()">
+
+        <div class="card-description">
+            <div class="card-header">
+                <div class="card-title">
+                    {{(foodMenuStateFacade?.selectedFoodItem | async)?.name}}
                 </div>
             </div>
-
-
-            <div class="card-image-container">
-                <img class="card-image"
-                     src="https://images.pexels.com/photos/1260968/pexels-photo-1260968.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"/>
+            <div class="card-body">
+                {{(foodMenuStateFacade?.selectedFoodItem | async)?.description}}
             </div>
         </div>
-        <div class="vertical-flex-spacer" *ngIf="menuItems"></div>
-
-
-        <!--            <div class="middle-bar">-->
-        <!--                Devin's Menus-->
-        <!--            </div>-->
-        <ng-container *ngIf="menuGroups">
-            <swiper [config]="config" class="swiper-container">
-
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide" *ngFor="let menuGroup of menuGroups">
-                        <img style="border-radius: 15px;" [src]="menuGroup?.image"
-                             (click)="selectMenuGroup(menuGroup.groupId)"/>
-                        <div class="group-label-container">
-                            <div class="group-label">{{menuGroup.name}}</div>
-                        </div>
-
-                    </div>
-
-
-                    <!--                <div class="swiper-slide" ><ion-img ></ion-img></div>-->
-                    <!--                <div class="swiper-slide" *ngFor="let menuGroup of menuGroups"><ion-img [src]="menuGroup[1]?.image"></ion-img></div>-->
-                </div>
-                <!-- Add Pagination -->
-                <div class="swiper-pagination"></div>
-            </swiper>
-        </ng-container>
-        <ng-container *ngIf="!menuGroups">
-            <swiper [config]="config" class="swiper-container">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide" *ngFor="let menuItem of menuItems">
-                        <div class="price-label-container">
-                            <div class="price-label">${{menuItem.price}}</div>
-                        </div>
-                        <img (click)="selectMenuGroup(menuItem.groupId)"
-                             [src]="menuItem?.image"/>
-                    </div>
-
-
-                    <!--                <div class="swiper-slide" ><ion-img ></ion-img></div>-->
-                    <!--                <div class="swiper-slide" *ngFor="let menuGroup of menuGroups"><ion-img [src]="menuGroup[1]?.image"></ion-img></div>-->
-                </div>
-                <!-- Add Pagination -->
-                <div class="swiper-pagination"></div>
-            </swiper>
-            <div class="vertical-flex-spacer"></div>
-
-        </ng-container>
-
+        <div class="card-image-container">
+            <img class="card-image"
+                 [src]="(foodMenuStateFacade?.selectedFoodItem | async)?.image"/>
+            <div class="add-to-order-button-container">
+                Add to Order
+            </div>
+        </div>
+        <div class="price-container">
+            <div class="price-text"> ${{(foodMenuStateFacade?.selectedFoodItem | async)?.price}}</div>
+        </div>
     </div>
 
-
-    <!--            <app-group-items (click)="selectMenuGroup(menuGroup.groupId)" *ngFor="let menuGroup of menuGroups"-->
-    <!--                             [menuGroups]="menuGroup">-->
-    <!--            </app-group-items>-->
-</ng-container>
+    <div class="vertical-flex-spacer" *ngIf="menuItems"></div>
+    <ng-container>
+        <swiper [config]="config" #usefulSwiper (click)="selectItem()" class="swiper-container">
+            <div class="swiper-wrapper" >
+                <div class="swiper-slide" [id]="menuItem.id" *ngFor="let menuItem of menuItems">
+                    <div class="price-label-container">
+                        <div class="price-label">${{menuItem.price}}</div>
+                    </div>
+                    <img [src]="menuItem?.image"/>
+                    <div class="group-label-container">
+                        <div class="group-label">{{menuItem?.name}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </swiper>
+    </ng-container>
+</div>
 
 

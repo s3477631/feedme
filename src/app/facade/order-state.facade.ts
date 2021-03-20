@@ -5,6 +5,9 @@ import {OrderState} from '../store/state/order.state';
 import {OrderDto} from '../model/order.dto';
 
 import * as orderSelectors from '../store/selectors/order.selector';
+
+import * as OrderActions from '../store/actions/order.actions';
+
 import {Observable} from 'rxjs';
 import {OrderActionsEnum} from '../store/enums/order.actions.enum';
 import {ProductDto} from '../model/product.dto';
@@ -27,12 +30,9 @@ export class OrderStateFacade {
     }
 
     public initializeListeners(): void {
-        this.allOrders = this.store.pipe(select(orderSelectors.orderSelector));
+        // this.allOrders = this.store.pipe(select(orderSelectors.orderSelector));
         this.orderQuantity = this.store.pipe(select(orderSelectors.orderQuantity));
         this.totalOrder = this.store.pipe(select(orderSelectors.totalOrderCost));
-        this.menuItems = this.store.pipe(select(orderSelectors.menuListSelector));
-        this.menuGroupItems = this.store.pipe(select(orderSelectors.menuGroupItems));
-        this.groupTitle = this.store.pipe(select(orderSelectors.groupTitle));
     }
 
     public addOrder(newOrder: ProductDto): void {
@@ -44,18 +44,10 @@ export class OrderStateFacade {
     public removeOrderItem(orderItem: ProductDto): void {
         this.store.dispatch({type: OrderActionsEnum.DECREMENT_ORDER_ITEM, order: orderItem});
     }
-
-    public loadMenuItems(group: number): void {
-        this.store.dispatch({type: OrderActionsEnum.LOAD_MENU, groupId: group});
-        this.clearGroupOptions();
-    }
-
-
-    public loadMenuGroups(group: string): void {
-        this.store.dispatch({type: OrderActionsEnum.LOAD_MENU_GROUPS, groupName: group});
-    }
-
-    public clearGroupOptions() {
-        this.store.dispatch({type: OrderActionsEnum.CLEAR_MENU_GROUP});
-    }
+    // public getOrder(): void {
+    //     this.store.dispatch(OrderActions.getOrders());
+    // }
+    // public showOrders(): Observable<ProductDto[]>{
+    //     return this.store.pipe(select(orderSelectors.orderSelector));
+    // }
 }

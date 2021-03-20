@@ -1,6 +1,9 @@
 import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {OrderStateFacade} from '../../facade/order-state.facade';
 import {tap} from 'rxjs/operators';
+import {DrinkMenuStateFacade} from '../../facade/drink-menu-state.facade';
+import {Router} from '@angular/router';
+import {UtilStateFacade} from '../../facade/util-state.facade';
 
 
 @Component({
@@ -11,24 +14,20 @@ import {tap} from 'rxjs/operators';
 export class DrinkPage implements OnInit {
     public menuGroups;
     public menuItems;
-    public groupTitle: string;
-    constructor(public orderStateFacade: OrderStateFacade, public cd: ChangeDetectorRef) {
+    constructor(public drinkMenuStateFacade: DrinkMenuStateFacade,
+                private utilStateFacade: UtilStateFacade,
+                public route: Router
+                ) {
     }
 
     ngOnInit() {
-        this.orderStateFacade.initializeListeners();
-        this.orderStateFacade.menuGroupItems.pipe(tap(menuGroups => {
-            this.menuGroups = menuGroups;
-            this.cd.detectChanges();
-        })).subscribe();
-        this.orderStateFacade.menuItems.pipe(tap(menuItems =>{
-            this.menuItems = menuItems;
-            this.cd.detectChanges();
-        })).subscribe();
-        this.orderStateFacade.groupTitle.pipe(tap(groupTitle => {
-            this.groupTitle = groupTitle;
-        })).subscribe();
+        this.drinkMenuStateFacade.initializeListeners();
+        this.drinkMenuStateFacade.getDrinkGroups();
     }
 
 
+    public goBack(): void {
+        this.route.navigate(['tabs', 'drink']);
+        this.utilStateFacade.backButton(false);
+    }
 }

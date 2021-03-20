@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {MenuServiceService} from '../../services/menu-service.service';
 
 @Component({
     selector: 'app-order-form',
@@ -9,14 +10,17 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 export class OrderFormComponent implements OnInit {
     public orderItems = [
         {id: 'OrderQuantity', dataType: 'ADD_SUBTRACT', label: 'Quantity',
-            value: 1, constraintMin: 0, constraintMax: 10, isRequired: false},
+            value: 1, constraintMin: 1, constraintMax: 10, isRequired: false},
         {id: 'OrderSize', dataType: 'DROP_DOWN', value: 'small', menuOptions: [
                 {size: 'small', value: 'small'},
                 {size: 'medium', value: 'medium'},
-                {size: 'large', value: 'large'}
+                {size: 'large', value: 'large'},
+                {size: 'extra large', value: 'xtra-large'}
                 ]}];
     public orderForm: FormGroup;
 
+    @Output()
+    formItems = new EventEmitter();
     constructor() {
     }
 
@@ -47,7 +51,7 @@ export class OrderFormComponent implements OnInit {
     public subscribeOrderForm() {
         this.orderForm.valueChanges.subscribe(value => {
             // console.log(value);
-            console.log(this.orderForm.value);
+            this.formItems.emit(this.orderForm.value);
         });
     }
 

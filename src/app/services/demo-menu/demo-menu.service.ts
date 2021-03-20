@@ -7,18 +7,29 @@ import {GroupingDto} from '../../model/grouping.dto';
 })
 export class DemoMenuService {
     mockResponseMap = {
-        'GET': {
-            'POST': {
-                '/core/api/submit-order': (body) => {
-                    return this.getConfirmation(body.processOrder);
-                }
+        'GET': {},
+        'POST': {
+            '/api/submit-order': (body) => {
+                return this.submitOrder(body);
             }
         }
     };
     drinkList: ProductDto[];
     foodList: ProductDto[];
-
+    orders = [];
     mockResponseRegexes = [
+        {
+            regex: /api\/orders/,
+            response: (args, body) => {
+                return this.getOrder();
+            }
+        },
+        {
+            regex: /api\/order-total/,
+            response: (args, body) => {
+                return this.orderTotal();
+            }
+        },
         {
             regex: /api\/food/,
             response: (args, body) => {
@@ -32,15 +43,21 @@ export class DemoMenuService {
             }
         },
         {
-            regex: /api\/groups-drink/,
+            regex: /api\/groups\/(.*)/,
             response: (args, body) => {
-                return this.drinkGroups();
+                return this.getGroups(args[1]);
             }
         },
         {
             regex: /api\/get-first-child-item\/(.*)/,
             response: (args, body) => {
-                return this.getGroupItems(args[1]);
+                return this.getMenuItems(args[1]);
+            }
+        },
+        {
+            regex: /api\/get-menu-item\/(.*)/,
+            response: (args, body) => {
+                return this.getItems(args[1]);
             }
         }
     ];
@@ -52,7 +69,7 @@ export class DemoMenuService {
         const foodGroups = [{
             id: '1',
             name: 'mains',
-            image:  'https://images.pexels.com/photos/299348/pexels-photo-299348.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
+            image: 'https://images.pexels.com/photos/299348/pexels-photo-299348.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
             groupId: 1,
             parent: true
         },
@@ -169,7 +186,7 @@ export class DemoMenuService {
             groupId: 1,
             quantity: 1,
             description: '250gm Angus Steak with home cooked chips. It will fill you up!',
-            image: 'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/steak-and-chips-f385bf3.jpg?quality=90&resize=504,458',
+            image: 'https://images.unsplash.com/photo-1579366948929-444eb79881eb?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTk0fHxzdGVhayUyMGFuZCUyMGZyaWVzfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
         }, {
             id: '2',
             name: 'Pizza',
@@ -219,16 +236,57 @@ export class DemoMenuService {
         return food;
     }
 
-    private getGroupItems(groupId: string): ProductDto[] {
-        // replace with a better mapping
-        if (groupId.length < 3) {
-            return this.getFood().filter(group => group.groupId === parseInt(groupId, 0));
+    private getGroups(groupType: string): ProductDto[] {
+        if (groupType === 'food') {
+            return this.foodGroups();
         } else {
-            return this.getDrink().filter(group => group.groupId === parseInt(groupId, 0));
+            return this.drinkGroups();
         }
     }
 
-    private getConfirmation(processOrder) {
+    private getOrder() {
+        return this.orders;
+    }
+    private orderTotal(){
+       return this.orders.reduce((acc, cur) => {
+                return acc + (parseFloat(cur.price) * parseFloat(cur.OrderQuantity));
+            }, 0.00);
+    }
+
+    private getMenuItems(groupId): ProductDto[] {
+        if (groupId.length === 1) {
+            const food = this.getFood().filter(group => group.groupId === parseInt(groupId, 0));
+            return food;
+        }
+    }
+
+    private getItems(itemId): ProductDto {
+        const test = this.getFood().filter(item => parseInt(item.id, 0) === parseInt(itemId, 0));
+        return test[0];
+    }
+
+
+    private submitOrder(processOrder) {
+        this.orders.push(processOrder);
+        console.log(this.orders);
+        const uniqueTabs = this.orders.reduce((acc, currentValue) => acc.some(tab => tab.id === currentValue.id) ? this.addOrderQuantity(acc, processOrder) : acc.concat(currentValue), []);
+        this.orders = [];
+        this.orders.push(...uniqueTabs);
+        return processOrder;
+    }
+
+    private addOrderQuantity(acc, processNewOrder) {
+        console.warn('-c-c-c-c-c-');
+        console.log(processNewOrder.OrderQuantity);
+        console.warn('-c-c-c-c-c-');
+        const added = acc.reduce((cum, cur) => {
+            if (cur.id === processNewOrder.id) {
+                cum = cur.OrderQuantity += processNewOrder.OrderQuantity;
+            }
+            return cum;
+        }, []);
+        console.log(added);
+        return acc;
     }
 
     getResponseFor(method: string, urlWithParams: string, body: any) {
@@ -247,7 +305,7 @@ export class DemoMenuService {
         if (result == null) {
             console.error('Demo route not matched: ' + urlWithParams);
         } else {
-            console.table(result);
+            // console.table(result);
         }
         return result;
     }
