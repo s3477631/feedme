@@ -13,7 +13,7 @@ import {Subscription} from 'rxjs';
     templateUrl: './food-detail.component.html',
     styleUrls: ['./food-detail.component.scss'],
 })
-export class FoodDetailComponent implements OnInit, OnDestroy {
+export class FoodDetailComponent implements OnDestroy {
     menuItems: ProductDto[];
     orderItems = {OrderQuantity: 1, OrderSize: 'medium'};
     config: SwiperOptions = {

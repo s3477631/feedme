@@ -22,5 +22,5 @@ export const selectedFoodItem = createAction(FoodActionsEnum.SELECTED_FOOD_MENU_
 );
 
 export const selectedFoodItemSuccess = createAction(FoodActionsEnum.SELECTED_FOOD_MENU_ITEM_SUCCESS,
-    props<{ foodMenuItem: ProductDto[] }>()
+    props<{ foodMenuItem: ProductDto}>()
 );
