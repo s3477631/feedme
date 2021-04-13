@@ -33,3 +33,70 @@
   background: transparent !important;
 }
 
+.welcome-text{
+  color: white;
+  font-size: 48px;
+}
+
+.greeting-container{
+  display: flex;
+  justify-content: center;
+}
+.feed-me-text{
+  color: white;
+  font-size: 36px;
+}
+.to-text{
+  color: white;
+  font-size: 18px;
+}
+.login-page-container{
+  display: flex;
+  background: radial-gradient(#4ac7e7,  #00A6ED,  #00A6ED);
+  height: 100%;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+
+.demo-start{
+  padding: 15px;
+  background: #e5341b;
+  color: white;
+  text-align: center;
+  margin-left: 15px;
+  margin-right: 15px;
+  border-radius: 15px;
+}
+.align-login-image{
+  display: flex;
+  justify-content: center;
+}
+.avatar-image{
+  width: 300px;
+  height: 300px;
+}
+.vertical-spacer{
+  display: flex;
+  flex: 1;
+}
+ion-slides {
+  height: 100%;
+}
+.slide-front-page{
+  height: 100%;
+  width: 100%;
+}
+.my-custom-menu {
+  --width: 100px;
+}
+.side-panel-menu-title{
+  --background: #00A6ED;
+}
+.side-panel-background{
+  --background: #F0EFF4 !important;
+}
+.side-panel-item{
+  --background: #d6d5de !important;
+  --color: black !important;
+  --border-color: transparent !important;
+}

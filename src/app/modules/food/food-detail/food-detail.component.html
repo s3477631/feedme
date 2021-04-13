@@ -15,7 +15,7 @@
                 <div class="options-title">Options:</div>
 
                 <div class="options-container">
-                    <app-order-form (formItems)="formItems($event)"></app-order-form>
+                    <app-order-form [orderItems]="orderItems" (formItems)="formItems($event)"></app-order-form>
                 </div>
             </div>
             <div class="card-description-panel">

@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ProductDto} from '../../../model/product.dto';
 import {SwiperOptions} from 'swiper';
 import {ModalController} from '@ionic/angular';
@@ -12,7 +12,7 @@ import {DrinkMenuStateFacade} from '../../../facade/drink-menu-state.facade';
     templateUrl: './drink-detail.component.html',
     styleUrls: ['./drink-detail.component.scss'],
 })
-export class DrinkDetailComponent implements OnDestroy {
+export class DrinkDetailComponent implements OnInit, OnDestroy {
     menuItems: ProductDto[];
     orderItems = {OrderQuantity: 1, OrderSize: 'medium'};
     config: SwiperOptions = {
@@ -26,6 +26,9 @@ export class DrinkDetailComponent implements OnDestroy {
         public drinkMenuStateFacade: DrinkMenuStateFacade,
         private menuService: MenuServiceService,
         private modalController: ModalController) {
+    }
+    public ngOnInit() {
+
     }
 
     closeMenuItem() {

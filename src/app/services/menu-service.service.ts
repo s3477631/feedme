@@ -11,7 +11,16 @@ export class MenuServiceService {
 
     constructor(public http: HttpClient) {
     }
-
+    public setDemo(){
+        const url = '/api/set-demo/';
+        const test = this.http.get(url);
+        test.subscribe(val => console.log(val));
+    }
+    // make a dto for this
+    public getTabs(){
+        const url = '/api/get-tabs/';
+        return this.http.get(url);
+    }
     public getOrders(): Observable<ProductDto[]> {
         const url = '/api/orders/';
         return this.http.get<ProductDto[]>(url);
@@ -53,9 +62,16 @@ export class MenuServiceService {
         const url = `api/groups/${groupName}`;
         return this.http.get<GroupingDto[]>(url);
     }
+    public getFormFields(menuItemId: string) {
+        const url = `/api/get-form-fields/${menuItemId}`;
+        return this.http.get(url);
+    }
+    public getGroupDescription(groupId: number) {
+        const url = `api/get-group-description/${groupId}`;
+        return this.http.get(url);
+    }
 
     public submitOrder(orderBody) {
-        console.log(orderBody);
         const url = '/api/submit-order';
         const test = this.http.post<any>(url, orderBody);
         test.subscribe(val => val);

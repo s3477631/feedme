@@ -1,11 +1,19 @@
 import {Injectable} from '@angular/core';
 import {ProductDto} from '../../model/product.dto';
 import {GroupingDto} from '../../model/grouping.dto';
+import {LocalStorageService} from 'ngx-webstorage';
+import {FixturesInterface} from './fixtures.interface';
+import {HospitalityFactory} from './hospitality/hospitality';
+import {BeautyFactory} from './beauty/beauty';
+import {ActivatedRoute} from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
 })
 export class DemoMenuService {
+    constructor(private localStorageService: LocalStorageService) {
+    }
+
     mockResponseMap = {
         'GET': {},
         'POST': {
@@ -14,9 +22,16 @@ export class DemoMenuService {
             }
         }
     };
-    drinkList: ProductDto[];
-    foodList: ProductDto[];
+    fixtures: FixturesInterface;
+    groupOne = [];
+    groupOneItems = [];
+    groupTwo = [];
+    groupTwoItems = [];
+    formFields = {};
     orders = [];
+    tabs = [];
+    groupOneDescription = {};
+    groupTwoDescription = {};
     mockResponseRegexes = [
         {
             regex: /api\/orders/,
@@ -65,188 +80,81 @@ export class DemoMenuService {
             response: (args, body) => {
                 return this.getItems(args[1]);
             }
+        },
+        {
+            regex: /api\/get-form-fields\/(.*)/,
+            response: (args, body) => {
+                return this.getFormFields(args[1]);
+            }
+        }, {
+            regex: /api\/set-demo/,
+            response: (args, body) => {
+                return this.setDemo();
+            }
+        }, {
+            regex: /api\/get-tabs/,
+            response: (args, body) => {
+                return this.getTabs();
+            }
+        },
+        {
+            regex: /api\/get-group-description\/(.*)/,
+            response: (args, body) => {
+                return this.getGroupDescription(args[1]);
+            }
         }
     ];
 
-    constructor() {
+    private setDemo() {
+        const serverUrl = this.localStorageService.retrieve('tenant');
+        this.setDemoFixtures(serverUrl);
+        return `setting ${serverUrl.substr(5, serverUrl.length)} demo`;
     }
 
     private foodGroups(): GroupingDto[] {
-        const foodGroups = [{
-            id: '1',
-            name: 'mains',
-            image: 'https://images.pexels.com/photos/299348/pexels-photo-299348.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
-            groupId: 1,
-            parent: true
-        },
-            {
-                id: '2',
-                name: 'entree',
-                groupId: 2,
-                image: 'https://images.pexels.com/photos/5639416/pexels-photo-5639416.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-                parent: true
-            },
-            {
-                id: '3',
-                name: 'lunch',
-                groupId: 3,
-                image: 'https://images.pexels.com/photos/1639565/pexels-photo-1639565.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-                parent: true
-            },
-            {
-                id: '4',
-                name: 'dessert',
-                groupId: 4,
-                image: 'https://images.pexels.com/photos/808941/pexels-photo-808941.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
-                parent: true
-            }
-
-        ];
-        return foodGroups;
+        return this.groupOne;
     }
-
-    private drinkGroups(): GroupingDto[] {
-        const drinkGroups = [{
-            id: '1',
-            name: 'Beer',
-            image: 'https://images.unsplash.com/photo-1441985969846-3e7c90531139?ixlib=rb-1.2.1&auto=format&fit=crop&w=2250&q=80',
-            groupId: 101,
-            parent: true
-        },
-            {
-                id: '2',
-                name: 'Wine',
-                groupId: 102,
-                image: 'https://images.pexels.com/photos/3756623/pexels-photo-3756623.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
-                parent: true
-            },
-            {
-                id: '3',
-                name: 'Spirits',
-                groupId: 103,
-                image: 'https://images.unsplash.com/photo-1509157774525-cd6d6cbf00a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80',
-                parent: true
-            },
-            {
-                id: '4',
-                name: 'Soft Drink',
-                groupId: 104,
-                image: 'https://images.unsplash.com/photo-1527960471264-932f39eb5846?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80',
-                parent: true
-            }];
-        return drinkGroups;
+    private getTabs() {
+        return this.tabs;
     }
-
+    private getGroupDescription(groupId: string){
+        if ( parseInt(groupId, 0) === 0){
+            return this.groupOneDescription;
+        } else {
+            return this.groupTwoDescription;
+        }
+    }
     private getDrink(): ProductDto[] {
-        const drink = [{
-            id: '1001',
-            name: 'Coca-cola',
-            price: '6.00',
-            quantity: 1,
-            groupId: 104,
-            description: '250ml Refreshing Beverage',
-            image: 'https://shortysliquor.com.au/media/catalog/product/cache/2fcc3329aef4183c8e06230d7e06f8f3/5/6/569-2.png',
-        }, {
-            id: '1002',
-            name: 'Fanta',
-            price: '5.00',
-            quantity: 1,
-            groupId: 104,
-            description: '250ml Refreshing Beverage',
-            image: 'https://shortysliquor.com.au/media/catalog/product/cache/2fcc3329aef4183c8e06230d7e06f8f3/f/a/fanta_250ml_climline.png',
-        }, {
-            id: '1003',
-            name: 'Orange Juice',
-            price: '5.50',
-            quantity: 1,
-            groupId: 104,
-            description: '250ml Refreshing Beverage',
-            image: 'https://shortysliquor.com.au/media/catalog/product/cache/2fcc3329aef4183c8e06230d7e06f8f3/3/0/300_1.png',
-        },
-            {
-                id: '1004',
-                name: 'Carlsberg',
-                price: '14.00',
-                quantity: 1,
-                groupId: 101,
-                description: 'pots, schooners or pints of Carlsberg',
-                image: 'https://ecampusontario.pressbooks.pub/app/uploads/sites/520/2019/12/2129H_0-300x296.jpg',
-            }, {
-                id: '1005',
-                name: '4x Gold',
-                price: '9.00',
-                quantity: 1,
-                groupId: 101,
-                description: 'pots, schooners or pints of 4x Gold',
-                image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRn5Rr-L4BqiPS4X7-_dZB-meEGjarMZT6QGQ&usqp=CAU',
-            }
-        ];
-        return drink;
+        return this.groupTwoItems;
     }
 
     private getFood(): ProductDto[] {
-        const food = [{
-            id: '1',
-            name: 'Steak & Chips',
-            price: '16.00',
-            groupId: 1,
-            quantity: 1,
-            description: '250gm Angus Steak with home cooked chips. It will fill you up!',
-            image: 'https://images.unsplash.com/photo-1579366948929-444eb79881eb?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTk0fHxzdGVhayUyMGFuZCUyMGZyaWVzfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
-        }, {
-            id: '2',
-            name: 'Pizza',
-            price: '15.00',
-            groupId: 1,
-            quantity: 1,
-            description: 'Authentic Italian Cuisine made by only the best chefs!',
-            image: 'https://thebigmansworld.com/wp-content/uploads/2020/03/2-ingredient-pizza-dough-13.jpg',
-        }, {
-            id: '3',
-            name: 'Burger',
-            price: '15.50',
-            groupId: 1,
-            quantity: 1,
-            description: 'Chicken burger made with love, lettuce and plenty of special sauce',
-            image: 'https://myfoodbook.com.au/sites/default/files/styles/single_recipe/public/recipe_photo/BuffaloBurger.jpg',
-        },
-            {
-                id: '104',
-                name: 'Dozen Freshly Shucked Oysters',
-                price: '38.00',
-                quantity: 1,
-                groupId: 2,
-                description: 'Traditional kilpatrick oysters with bacon pieces w/ a twist of lemon  ',
-                image: 'https://myfoodbook.com.au/sites/default/files/styles/single_recipe/public/recipe_photo/BuffaloBurger.jpg',
-            },
-            {
-                id: '105',
-                name: 'Garlic Bread',
-                price: '11.00',
-                quantity: 1,
-                groupId: 2,
-                description: 'Home-made garlic bread with fresh gloves from the garden out back.',
-                image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Garlicbread.jpg/1200px-Garlicbread.jpg',
-            },
-            {
-                id: '106',
-                name: 'Arancini Balls',
-                price: '18.50',
-                quantity: 1,
-                groupId: 2,
-                description: 'Arancini Balls from Grandma`s special recipe',
-                image: 'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/arancini_balls-db2b1df.jpg',
-            }
+        return this.groupOneItems;
+    }
 
-        ];
-        return food;
+    private getFormFields(menuItemId: number) {
+        return this.formFields[menuItemId];
+    }
+
+    private setDemoFixtures(severUrl: string) {
+        switch (severUrl) {
+            case 'show-food':
+                this.fixtures = new HospitalityFactory();
+                break;
+            case 'show-beauty':
+                this.fixtures = new BeautyFactory();
+                break;
+        }
+        if (this.fixtures) {
+            this.buildModel();
+        }
     }
 
     private getGroups(groupType: string): ProductDto[] {
-        if (groupType === 'food') {
-            return this.foodGroups();
+        if (groupType === 'one') {
+            return this.groupOne;
         } else {
-            return this.drinkGroups();
+            return this.groupTwo;
         }
     }
 
@@ -287,10 +195,39 @@ export class DemoMenuService {
 
     }
 
+    private buildModel() {
+        this.orders = [];
+        this.groupOne = [];
+        this.groupOneItems = [];
+        this.groupTwo = [];
+        this.groupTwoItems = [];
+        this.formFields = {};
+        this.tabs = [];
+        this.groupOneDescription = {};
+        this.groupTwoDescription = {};
+        this.fixtures.getTabs().forEach((tab) => {
+            this.tabs.push(tab);
+        });
+        this.fixtures.getGroupOne().forEach((groupItem) => {
+            this.groupOne.push(groupItem);
+        });
+        this.fixtures.getGroupTwo().forEach((groupItem) => {
+            this.groupTwo.push(groupItem);
+        });
+        this.fixtures.getItemsOne().forEach((item) => {
+            this.groupOneItems.push(item);
+        });
+        this.fixtures.getItemsTwo().forEach((item) => {
+            this.groupTwoItems.push(item);
+        });
+        // possibly make as arrays instead of objects
+        this.groupOneDescription = this.fixtures.getGroupOneDescription();
+        this.groupTwoDescription = this.fixtures.getGroupTwoDescription();
+        this.formFields = this.fixtures.getFormFields();
+    }
 
     private submitOrder(processOrder) {
         this.orders.push(processOrder);
-        console.log(this.orders);
         const uniqueTabs = this.orders.reduce((acc, currentValue) => acc.some(tab => tab.id === currentValue.id) ? this.addOrderQuantity(acc, processOrder) : acc.concat(currentValue), []);
         this.orders = [];
         this.orders.push(...uniqueTabs);
@@ -298,9 +235,6 @@ export class DemoMenuService {
     }
 
     private addOrderQuantity(acc, processNewOrder) {
-        console.warn('-c-c-c-c-c-');
-        console.log(processNewOrder.OrderQuantity);
-        console.warn('-c-c-c-c-c-');
         const added = acc.reduce((cum, cur) => {
             if (cur.id === processNewOrder.id) {
                 cum = cur.OrderQuantity += processNewOrder.OrderQuantity;

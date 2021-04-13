@@ -15,7 +15,7 @@ import {ProductDto} from '../../model/product.dto';
 export class DrinkMenuEffects {
     public loadDrinkMenuGroupList$ = createEffect(() => this.actions.pipe(
         ofType(DrinkMenuActions.loadDrinkMenu),
-        switchMap((action) => this.loadDrinkMenuGroup('drink').pipe(
+        switchMap((action) => this.loadDrinkMenuGroup('two').pipe(
             map((drinkMenuGroup) => DrinkMenuActions.loadDrinkMenuSuccess({drinkMenu: drinkMenuGroup})),
             catchError((errorParam) => {
                 return EMPTY;

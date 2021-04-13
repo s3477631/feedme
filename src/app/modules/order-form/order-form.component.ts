@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MenuServiceService} from '../../services/menu-service.service';
 
@@ -8,26 +8,19 @@ import {MenuServiceService} from '../../services/menu-service.service';
     styleUrls: ['./order-form.component.scss'],
 })
 export class OrderFormComponent implements OnInit {
-    public orderItems = [
-        {id: 'OrderQuantity', dataType: 'ADD_SUBTRACT', label: 'Quantity',
-            value: 1, constraintMin: 1, constraintMax: 10, isRequired: false},
-        {id: 'OrderSize', dataType: 'DROP_DOWN', value: 'small', menuOptions: [
-                {size: 'small', value: 'small'},
-                {size: 'medium', value: 'medium'},
-                {size: 'large', value: 'large'},
-                {size: 'extra large', value: 'xtra-large'}
-                ]}];
+    @Input()
+    public orderItems;
     public orderForm: FormGroup;
 
     @Output()
     formItems = new EventEmitter();
+
     constructor() {
     }
-
     ngOnInit() {
         this.buildOrderForm();
+        this.formItems.emit(this.orderForm.value);
     }
-
     public buildOrderForm(): void {
         const group: any = {};
         if (this.orderItems) {
@@ -48,9 +41,9 @@ export class OrderFormComponent implements OnInit {
         this.orderForm = new FormGroup(group);
         this.subscribeOrderForm();
     }
+
     public subscribeOrderForm() {
         this.orderForm.valueChanges.subscribe(value => {
-            // console.log(value);
             this.formItems.emit(this.orderForm.value);
         });
     }

@@ -3,6 +3,7 @@ import {FoodMenuStateFacade} from '../../facade/food-menu-state.facade';
 import {MenuServiceService} from '../../services/menu-service.service';
 import {Router} from '@angular/router';
 import {UtilStateFacade} from '../../facade/util-state.facade';
+import {MenuController} from '@ionic/angular';
 
 @Component({
     selector: 'app-tab-food',
@@ -17,6 +18,7 @@ export class FoodPage implements OnInit {
     constructor(public foodMenuStateFacade: FoodMenuStateFacade,
                 public utilStateFacade: UtilStateFacade,
                 private route: Router,
+                private menu: MenuController,
                 public menuService: MenuServiceService) {}
 
     public ngOnInit(): void {
@@ -26,5 +28,9 @@ export class FoodPage implements OnInit {
     public routeBack(): void {
         this.route.navigate(['tabs', 'food']);
         this.utilStateFacade.backButton(false);
+    }
+
+    public openSide(){
+        this.menu.open('side-menu').then(() => {});
     }
 }

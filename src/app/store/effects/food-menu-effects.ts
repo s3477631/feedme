@@ -15,7 +15,7 @@ import * as DrinkMenuActions from '../actions/drink-menu.actions';
 export class FoodMenuEffects {
     public loadFoodMenuGroupList$ = createEffect(() => this.actions.pipe(
         ofType(FoodMenuActions.loadFoodMenuGroups),
-        switchMap((action) => this.loadFoodMenuGroup('food').pipe(
+        switchMap((action) => this.loadFoodMenuGroup('one').pipe(
             map((foodMenuGroup) => FoodMenuActions.loadFoodMenuGroupsSuccess({foodMenuGroups: foodMenuGroup})),
             catchError((errorParam) => {
                 return EMPTY;

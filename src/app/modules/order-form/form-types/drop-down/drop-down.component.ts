@@ -13,6 +13,8 @@ export class DropDownComponent implements OnInit {
   parentForm: FormGroup;
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.orderItems)
+  }
 
 }

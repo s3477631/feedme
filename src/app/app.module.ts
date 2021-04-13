@@ -14,18 +14,25 @@ import {HttpClientModule} from '@angular/common/http';
 import {NgxWebstorageModule} from 'ngx-webstorage';
 import {NgrxModule} from './store/module/ngrx.module';
 import {HomeComponent} from './modules/home/home.component';
+import {HospitalityComponent} from './modules/welcome-screens/hospitality/hospitality.component';
+import {BeautyComponent} from './modules/welcome-screens/beauty/beauty.component';
+import {NgxUsefulSwiperModule} from 'ngx-useful-swiper';
 
 
 
 @NgModule({
-    declarations: [AppComponent, HomeComponent],
+    declarations: [
+        AppComponent,
+        HospitalityComponent,
+        BeautyComponent,
+        HomeComponent],
     entryComponents: [],
     imports: [BrowserModule, IonicModule.forRoot(),
         HttpClientModule,
         InterceptorsModule,
         NgxWebstorageModule.forRoot(),
         AppRoutingModule,
-        NgrxModule,
+        NgrxModule
     ],
     providers: [
         StatusBar,

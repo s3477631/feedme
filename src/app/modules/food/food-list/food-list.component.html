@@ -2,9 +2,7 @@
 <div class="swiper-container-wrapped">
     <div class="vertical-flex-spacer"></div>
     <div class="vertical-flex-spacer"></div>
-
     <div class="card-container" (click)="presentModal()">
-
         <div class="card-description">
             <div class="card-header">
                 <div class="card-title">
@@ -26,7 +24,6 @@
             <div class="price-text"> ${{(foodMenuStateFacade?.selectedFoodItem | async)?.price}}</div>
         </div>
     </div>
-
     <div class="vertical-flex-spacer" *ngIf="menuItems"></div>
     <ng-container>
         <swiper [config]="config" #usefulSwiper (click)="selectItem()" class="swiper-container">
@@ -44,6 +41,7 @@
             <div class="swiper-pagination"></div>
         </swiper>
     </ng-container>
+
 </div>
 
 

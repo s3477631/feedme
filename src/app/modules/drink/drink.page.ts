@@ -1,9 +1,9 @@
-import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
-import {OrderStateFacade} from '../../facade/order-state.facade';
-import {tap} from 'rxjs/operators';
+import {Component, OnInit} from '@angular/core';
 import {DrinkMenuStateFacade} from '../../facade/drink-menu-state.facade';
 import {Router} from '@angular/router';
 import {UtilStateFacade} from '../../facade/util-state.facade';
+import {MenuServiceService} from '../../services/menu-service.service';
+import {MenuController} from '@ionic/angular';
 
 
 @Component({
@@ -12,10 +12,11 @@ import {UtilStateFacade} from '../../facade/util-state.facade';
     styleUrls: ['drink.page.scss']
 })
 export class DrinkPage implements OnInit {
-    public menuGroups;
     public menuItems;
     constructor(public drinkMenuStateFacade: DrinkMenuStateFacade,
                 private utilStateFacade: UtilStateFacade,
+                private menuService: MenuServiceService,
+                private menu: MenuController,
                 public route: Router
                 ) {
     }
@@ -24,9 +25,11 @@ export class DrinkPage implements OnInit {
         this.drinkMenuStateFacade.initializeListeners();
         this.drinkMenuStateFacade.getDrinkGroups();
     }
+    public openSide(){
+        this.menu.open('side-menu').then(() => {});
+    }
 
-
-    public goBack(): void {
+    public routeBack(): void {
         this.route.navigate(['tabs', 'drink']);
         this.utilStateFacade.backButton(false);
     }

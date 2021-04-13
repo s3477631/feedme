@@ -7,6 +7,7 @@ import {FoodMenuStateFacade} from '../../../facade/food-menu-state.facade';
 import {DrinkMenuStateFacade} from '../../../facade/drink-menu-state.facade';
 import {Subscription} from 'rxjs';
 import {UtilStateFacade} from '../../../facade/util-state.facade';
+import {MenuServiceService} from '../../../services/menu-service.service';
 
 @Component({
     selector: 'app-item-list',
@@ -36,6 +37,7 @@ export class ItemListComponent implements OnInit, OnDestroy {
                 private foodMenuStateFacade: FoodMenuStateFacade,
                 private drinkMenuStateFacade: DrinkMenuStateFacade,
                 private utilStateFacade: UtilStateFacade,
+                public menuService: MenuServiceService,
                 private cd: ChangeDetectorRef,
                 private route: ActivatedRoute,
                 private router: Router) {

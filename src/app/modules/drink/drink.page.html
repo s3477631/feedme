@@ -1,20 +1,24 @@
 <ion-content [fullscreen]="true">
   <ion-header slot="fixed">
     <ion-toolbar class="toolbar-header">
-      <ion-row *ngIf="(utilStateFacade.showBackButton() | async)"
-               class="ion-align-items-center" style="margin-left: 5px; margin-top: 10px;">
-        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
-          <path d="M0 0h24v24H0V0z" fill="none"/>
-          <path stroke="white" fill="white"
-                d="M19 11H7.83l4.88-4.88c.39-.39.39-1.03 0-1.42-.39-.39-1.02-.39-1.41 0l-6.59 6.59c-.39.39-.39 1.02 0 1.41l6.59 6.59c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L7.83 13H19c.55 0 1-.45 1-1s-.45-1-1-1z"/>
-        </svg>
-        <ion-text (click)="goBack()">Back</ion-text>
-      </ion-row>
-      <div>
-        <ion-title style="text-align: center; font-size: 36px;">
-          <ion-text>Drink Menu</ion-text>
+      <ion-row class="ion-justify-content-between" style="margin-left: 5px; margin-top: 10px;">
+
+        <div *ngIf="(utilStateFacade.showBackButton() | async)" (click)="routeBack()" style="display: flex; align-items: center;">
+          <svg xmlns="http://www.w3.org/2000/svg" height="38" viewBox="0 0 24 24" width="38">
+            <path d="M0 0h24v24H0V0z" fill="none"/>
+            <path stroke="white" fill="white"
+                  d="M19 11H7.83l4.88-4.88c.39-.39.39-1.03 0-1.42-.39-.39-1.02-.39-1.41 0l-6.59 6.59c-.39.39-.39 1.02 0 1.41l6.59 6.59c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L7.83 13H19c.55 0 1-.45 1-1s-.45-1-1-1z"/>
+          </svg>
+        </div>
+        <div *ngIf="!(utilStateFacade.showBackButton() | async)" (click)="openSide()">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="38px" height="38px"><path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+
+        </div>
+        <ion-title style="font-size: 36px; text-align: center">
+          <ion-text>{{(menuService?.getGroupDescription(1) | async)?.pageTitle}}</ion-text>
         </ion-title>
-      </div>
+      </ion-row>
 
 
     </ion-toolbar>

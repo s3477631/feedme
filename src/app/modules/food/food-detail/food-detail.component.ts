@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ProductDto} from '../../../model/product.dto';
 import {SwiperOptions} from 'swiper';
 import {ModalController} from '@ionic/angular';
@@ -11,9 +11,9 @@ import {Subscription} from 'rxjs';
     templateUrl: './food-detail.component.html',
     styleUrls: ['./food-detail.component.scss'],
 })
-export class FoodDetailComponent implements OnDestroy {
+export class FoodDetailComponent implements OnInit, OnDestroy {
     menuItems: ProductDto[];
-    orderItems = {OrderQuantity: 1, OrderSize: 'medium'};
+    public orderItems;
     config: SwiperOptions = {
         pagination: {el: '.swiper-pagination', clickable: true},
         spaceBetween: 50,
@@ -25,6 +25,16 @@ export class FoodDetailComponent implements OnDestroy {
         public foodMenuStateFacade: FoodMenuStateFacade,
         private menuService: MenuServiceService,
         private modalController: ModalController) {
+    }
+    public ngOnInit(): void {
+      const selectedFood =  this.foodMenuStateFacade.selectedFoodItem.subscribe(selectedFoodItem => {
+        const formFields =  this.menuService.getFormFields(selectedFoodItem.id).subscribe(fields => {
+              this.orderItems = fields;
+          });
+        this.subscriptions.add(formFields);
+        });
+
+      this.subscriptions.add(selectedFood);
     }
 
     closeMenuItem() {

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {LocalStorageService} from 'ngx-webstorage';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -8,15 +7,10 @@ import {LocalStorageService} from 'ngx-webstorage';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-
-  constructor(public router: Router,
-              public localStorage: LocalStorageService,
-              public route: ActivatedRoute) { }
+  slideOpts = {
+    initialSlide: 0,
+  };
+  constructor(public router: Router) { }
 
   ngOnInit() {}
-
-  goToApp() {
-    this.localStorage.store('tenant', 'show');
-    this.router.navigate(['tabs/food'], {relativeTo: this.route});
-  }
 }
