@@ -27,6 +27,7 @@ mobile_build:
 deploy_dev:
   environment: Development
   extends: .deploy_aws
+
 .deploy_aws:
   stage: deploy
   variables:
