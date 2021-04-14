@@ -16,7 +16,6 @@ npm_install:
   script:
     - npm install
 
-
 mobile_build:
   stage: build
   script:
