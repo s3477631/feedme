@@ -1,6 +1,5 @@
 default:
   image: registry.gitlab.com/sherper/aws-ci-deploy
-
 stages:
   - install
   - build
