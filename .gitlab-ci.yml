@@ -11,6 +11,7 @@ cache:
   key: "nm_v1_$CI_BUILD_REF_NAME"
   paths:
     - node_modules
+
 npm_install:
   stage: install
   script:
