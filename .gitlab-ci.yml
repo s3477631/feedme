@@ -7,7 +7,6 @@ stages:
 
 variables:
   npm_config_cache: "$CI_PROJECT_DIR/.npm"
-
 cache:
   key: "nm_v1_$CI_BUILD_REF_NAME"
   paths:
