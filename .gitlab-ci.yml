@@ -4,6 +4,7 @@ stages:
   - install
   - build
   - deploy
+
 variables:
   npm_config_cache: "$CI_PROJECT_DIR/.npm"
 
