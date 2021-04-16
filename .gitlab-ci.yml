@@ -21,6 +21,7 @@ mobile_build:
   stage: build
   script:
     - npm run build
+
   artifacts:
     name: mobile-app
     paths:
