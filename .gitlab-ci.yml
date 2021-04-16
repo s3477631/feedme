@@ -32,6 +32,7 @@ deploy_dev:
   extends: .deploy_aws
 .deploy_aws:
   stage: deploy
+
   variables:
     BUCKET_NAME: $S3_BUCKET_NAME
 
