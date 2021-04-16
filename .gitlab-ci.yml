@@ -22,7 +22,6 @@ mobile_build:
     name: mobile-app
     paths:
       - www
-
 deploy_dev:
   environment: Development
   extends: .deploy_aws
