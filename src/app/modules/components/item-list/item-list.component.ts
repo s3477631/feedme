@@ -31,7 +31,7 @@ export class ItemListComponent implements OnInit, OnDestroy {
         loop: true
     };
     public isLoading = true;
-    public foodMenu: boolean
+    public foodMenu: boolean;
     constructor(private modalController: ModalController,
                 private activateRoute: ActivatedRoute,
                 private foodMenuStateFacade: FoodMenuStateFacade,

@@ -11,7 +11,7 @@
           <ion-thumbnail slot="start">
             <img [src]="order?.image">
           </ion-thumbnail>
-          <ion-label text-wrap class="order-item-text">{{order?.name}} {{order?.OrderSize}}</ion-label>
+          <ion-label text-wrap data-cy="order-name-size" class="order-item-text">{{order?.name}} {{order?.OrderSize}}</ion-label>
 
           <ion-button size="default"  class="decrease-button">
             <ion-text class="decrease-icon">-</ion-text>

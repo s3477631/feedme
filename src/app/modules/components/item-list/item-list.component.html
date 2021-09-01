@@ -47,10 +47,14 @@
 
       <swiper [config]="config" class="swiper-container">
         <div class="swiper-wrapper" >
-          <div class="swiper-slide" (click)="selectMenuGroup(menuGroup?.groupId)" *ngFor="let menuGroup of menuGroups" >
+          <div class="swiper-slide" (click)="selectMenuGroup(menuGroup?.groupId)"
+               *ngFor="let menuGroup of menuGroups"
+               data-cy="login-input"
+               [attr.data-cy]="'parent-item-name-' + menuGroup.name"
+          >
             <img style="border-radius: 15px;"  [src]="menuGroup?.image"/>
             <div class="group-label-container">
-              <div class="group-label">{{menuGroup.name}}</div>
+              <div class="group-label" >{{menuGroup.name}}</div>
             </div>
           </div>
         </div>

@@ -16,7 +16,7 @@
         <div class="card-image-container">
             <img class="card-image"
                  [src]="(foodMenuStateFacade?.selectedFoodItem | async)?.image"/>
-            <div class="add-to-order-button-container">
+            <div data-cy=add-to-order-modal class="add-to-order-button-container">
                 Add to Order
             </div>
         </div>
@@ -34,7 +34,7 @@
                     </div>
                     <img [src]="menuItem?.image"/>
                     <div class="group-label-container">
-                        <div class="group-label">{{menuItem?.name}}</div>
+                        <div data-cy="parent-item-name" class="group-label">{{menuItem?.name}}</div>
                     </div>
                 </div>
             </div>

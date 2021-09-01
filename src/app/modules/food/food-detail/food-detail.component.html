@@ -1,5 +1,5 @@
 <ion-content>
-    <div class="card-container">
+    <div class="card-container" data-cy="food-detail-menu">
         <div (click)="closeMenuItem()" class="close-button">
             <ion-icon class="close-button-icon" name="close-outline"></ion-icon>
         </div>
@@ -29,7 +29,7 @@
                         {{(foodMenuStateFacade?.selectedFoodItem | async)?.description}}
                     </div>
                 </div>
-                <div class="add-to-order-button" (click)="addToOrders()">
+                <div class="add-to-order-button" data-cy="add-order-button" (click)="addToOrders()">
                     Add to Orders
                 </div>
             </div>
